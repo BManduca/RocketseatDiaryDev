@@ -1,7 +1,7 @@
 ___________________________________________________________________________________________________ 
 
 
-### Fundamentos React
+### Fundamentos ReactJS - Aula 01
 
 - Biblioteca para construção de interfaces altamente interativas.
     - Interfaces não são somente interfaces Web
@@ -46,5 +46,53 @@ ________________________________________________________________________________
     - Rendering Patterns
     - Ex: Wordpress, Ruby & Rails(Github), Magento...
     - Padrão tradicional
+
+___________________________________________________________________________________________________ 
+
+### Bundlers & compilers - Aula 02
+
+- Nem sempre os browsers, vão suportar as versões mais atualizadas do JS que estamos utilizando.
+- Por isso, foram criadas várias ferramentas, para fazer com que a gente consiga converter nosso código que está escrito em um JS mais moderno, para versões específicas do JS que rodam em ambientes específicos.
+
+
+- #### Compilers
+    - São compiladores de código, ou seja, ferramentas que convertem nosso código de um formato para outro
+    - Exemplo: Executar um código react em um navegador, porém, este navegador não suporta ainda algumas funcionalides do JS, sendo assim, eu preciso converter este meu código de uma versão mais atualizada do JS para uma versão que o navegador consiga compreender.
+
+    - Compiler + famoso => Babel (https://babeljs.io/)
+
+- #### Bundlers
+    - Algo bem comum quando trabalhamos com arquivos escritos JS, é querer distribuir nossa aplicação em múltiplos arquivos, que ao ir importando um arquivo dentro do outro e juntando todas as funcionalidades existentes, resultaram na criação da aplicação com vários aquivos JS que montam a funcionalidade esperada da aplicação
+    - Essa ação não é suportada nativamente pelos browsers
+    - bundler mais famoso => webpack (https://webpack.js.org/)
+    - #### Alternativas
+
+        - #### Vite (https://vitejs.dev/)
+            - O vite ele utiliza por padrão os ECMA Scripts models nativos, ou seja, não é necessário bundlers
+            - efetua o processo de compiling de forma automática, ou seja, não precisa do babel para executar..ele tem um compilador interno do próprio Vite.
+             - Desta forma ao utilizar o Vite, teremos o melhor dos dois (Bundlers e compilers), utilizando os ECM nativos dos próprios browser e assim conseguimos construir nossas aplicações front-end de uma maneira mais performática.
+
+        - #### Snowpack (https://www.snowpack.dev/)
+     
+___________________________________________________________________________________________________ 
+
+- ### Criação do primeiro projeto - Aula 03
+
+    - #### versionamento do node 
+        - n => (https://github.com/tj/n)
+        - instalação => npm install -g n
+
+    - #### inicializando o projeto novo
+        - npm create vite@latest
+        - escolher o framework
+        - selecionar a variante
+            - SWC(Speedy Web Compiler) é um compilador TypeScript/JavaScript super-rápido escrito em Rust.
+        - start no projeto
+            - cd 01-fundamentos-reactjs
+            - npm install
+            - npm run dev
+
+    - #### Curiosidades
+        - o vite ele já traz o fast refesh de maneira nativa, ou seja, todas as alterações refletem de maneira automática no browser
 
 ___________________________________________________________________________________________________ 
