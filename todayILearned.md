@@ -107,10 +107,19 @@ ________________________________________________________________________________
             - Basicamente é um arquivo JavaScript com HTML dentro dele 
 ___________________________________________________________________________________________________ 
 
-- ### Propriedades - AUla 05
+- ### Propriedades - Aula 05
 
     - informações que são passadas para componentes
     - Assim como passamos para as tags HTML, os atributos necessários, nos componentes temos um comportamento parecido, porém o que passamos são propriedades.
     - Com os componentes conseguimos aproveitar o HTML, estilização, funcionamento com JS e acima de tudo diferenciação no uso ou na chamada do componente dentro da aplicação.
     - Propriedades alteram elementos visuais de um componente sem que seja preciso perder a flexibilidade de abstrair um componente em outro arquivo para reaproveitar elementos que sejam comuns dentro desses componentes 
+___________________________________________________________________________________________________ 
+
+- ### CSS Modules - Aula 06
+
+    - Escopo: quando temos algumas propriedades atreladas a um componente e gostariamos que não afetasse outra parte por exemplo da aplicação, nos definimos esta dentro de um escopo, ou seja, em uma estrutura(espaço) aonde tudo que for designado ali, so será aplicado ao componente.
+    - Scoped CSS: é quando temos um css especifico de um componente e não afete outras partes do código ou da aplicação, como mencionamos logo acima.
+    - Vite CSS Modules => https://vitejs.dev/guide/features#css-modules
+    - Para que um CSS fique totalmente atrelado a um componente e nao interfira em outros elementos, a extensão do arquivo deve ficar como (NomeDoArquivo).module.css
+    - Quando trabalhamos com CSS modules, buscamos trabalhar essencialmente com Classes e não utilizar ID's ou qualquer outro tipo de identificação/seleção
 ___________________________________________________________________________________________________ 
