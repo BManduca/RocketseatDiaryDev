@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 // ReactDOM => faz a integração do React(Core) com a DOM
 // DOM -> Document Object Model => representação do HTML através do JS
 // Ao importar o ReactDOM, estamos integrando o React para funcionar em um ambiente WEB(Browser)
-import App from './App.jsx'
+import { App } from './App.jsx'
 
 /* 
 

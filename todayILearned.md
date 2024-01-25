@@ -96,3 +96,21 @@ ________________________________________________________________________________
         - o vite ele já traz o fast refesh de maneira nativa, ou seja, todas as alterações refletem de maneira automática no browser
 
 ___________________________________________________________________________________________________ 
+
+- ### Componentes - Aula 04
+
+    - Componente em si é uma forma de 'desacoplar' um trecho do código ou da nossa interface para que isso se torne repetitivel ou que se torne muito mais fácil de aplicar uma manutenção futuramente em um trecho muito menor da interface em si.
+    - O Componente a gente pode entender como um trecho ou uma parte da interface da nossa aplicação e que pode ser repetida várias vezes e inclusive com informações diferentes.
+    - Basicamente Componente é uma função que retorna HTML
+        - todos os componentes da aplicação react precisão tem extensão JSX
+            - JSX = JavaScript + XML (HTML)
+            - Basicamente é um arquivo JavaScript com HTML dentro dele 
+___________________________________________________________________________________________________ 
+
+- ### Propriedades - AUla 05
+
+    - informações que são passadas para componentes
+    - Assim como passamos para as tags HTML, os atributos necessários, nos componentes temos um comportamento parecido, porém o que passamos são propriedades.
+    - Com os componentes conseguimos aproveitar o HTML, estilização, funcionamento com JS e acima de tudo diferenciação no uso ou na chamada do componente dentro da aplicação.
+    - Propriedades alteram elementos visuais de um componente sem que seja preciso perder a flexibilidade de abstrair um componente em outro arquivo para reaproveitar elementos que sejam comuns dentro desses componentes 
+___________________________________________________________________________________________________ 
