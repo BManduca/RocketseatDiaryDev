@@ -1,0 +1,13 @@
+.wrapper {
+    /* 70*16 = 1120 */
+    max-width: 70rem;
+    /* centralizado */
+    margin: 2rem auto;
+    padding: 0 1rem;
+
+    display: grid;
+    grid-template-columns: 256px 1fr;
+    gap: 2rem;
+    /* alinhar sempre no topo */
+    align-items: flex-start; 
+}

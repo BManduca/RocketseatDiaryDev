@@ -123,3 +123,23 @@ ________________________________________________________________________________
     - Para que um CSS fique totalmente atrelado a um componente e nao interfira em outros elementos, a extensão do arquivo deve ficar como (NomeDoArquivo).module.css
     - Quando trabalhamos com CSS modules, buscamos trabalhar essencialmente com Classes e não utilizar ID's ou qualquer outro tipo de identificação/seleção
 ___________________________________________________________________________________________________ 
+
+
+- ### CSS Global - Aula 07
+
+    - tabela cores(mostrando codigo hash) com base no tailwind => https://tailwindcss.com/docs/customizing-colors
+    - -webkit-font-smoothing: antialiased
+        - propriedade que faz as letras ficarem mais desenhadas, mais fininhas, com um certo padrão de detalhamento e isso pode ser usado geralmente quando não utilizamos as fontes que são padrão do sistema.
+
+    - ![Link Preconnect font Google](/RocketseatDiaryDev/aulas/01-fundamentos-reactjs/img/linkRoboto.png)
+        - Links que vão estabelecer digamos a conexão do nosso servidor com o servidor da Google, para buscar as fontes
+
+    - Utilizar tamanho da fonte relativas (rem) => ao utilizar 1rem, por exemplo, quer dizer que eu vou estar colocando/utilizando 1 unidade relativa do tamanho pardão do HTML, que é 16px por padrão, caso o usuário não aumente e nem diminua, o tamanho da fonte será esse.
+
+___________________________________________________________________________________________________ 
+
+- ### Components: Sidebar - Aula 08
+    - div por padrão já é display-block, ou seja, sempre terá 100% da largura.
+    - ao utilizarmos o grid-template-columns, podemos colocar valores fixos para algumas colunas, porém, podemos também utilizar 1fr, por exemplo, onde fr é a unidade utilizada no grid quando queremos dizer que algo vai ter um tamanho flexível.
+___________________________________________________________________________________________________ 
+
