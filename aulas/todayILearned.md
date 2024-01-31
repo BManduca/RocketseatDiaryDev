@@ -141,5 +141,32 @@ ________________________________________________________________________________
 - ### Components: Sidebar - Aula 08
     - div por padrão já é display-block, ou seja, sempre terá 100% da largura.
     - ao utilizarmos o grid-template-columns, podemos colocar valores fixos para algumas colunas, porém, podemos também utilizar 1fr, por exemplo, onde fr é a unidade utilizada no grid quando queremos dizer que algo vai ter um tamanho flexível.
+    - overflow: hidden => ele faz com que o elemento ocupe somente o espaço ou tamanho da sidebar que estamos utilizando na aplicação 
+    - https://phosphoricons.com/ => biblioteca para icons
 ___________________________________________________________________________________________________ 
 
+- ### Components: Post - Aula 09
+    - Tag time => Ela permite que passemos um atríbuto chamado 'dateTime'
+        - as propriedades que possuem a junção de mais de uma palavra, sempre utilizam camelCase
+___________________________________________________________________________________________________ 
+
+- ### Estilizações do Post - Aula 10
+    - Quando utilizamos o seguinte padrão: .post > header {}
+        - significa que iremos aplicar algum estilo na header que esta diretamente dentro do post
+        (8:10)
+        - focus-within => é utilizado quando basicamente é encontrado alguma situação aonde houver foco em algum input, text-area ou qualquer elemento dentro do local aonde estamos trabalhando, no qual será aplicado alguma estilização, dentro deste container que estamos trabalhando.
+         
+___________________________________________________________________________________________________ 
+
+- ### Estilizações do Comentário - Aula 12
+
+    - utilizando display: flex, para deixar o avatar e o comentário lado a lado no box de comentário
+    - Quando presenciamos uma div, envolvendo o elemento que vamos estilizar e que tem como propriedade o display: flex, podemos utilizar o flex: 1 em qualquer elemento dentro dessa div 'pai' e isso faz com que a div seja 'esticada', ou seja, ela vai acabar utilizando todo o espaço ali presente
+    - border: 0; -> para resetar o estilo padrão que os buttons tem no html 
+___________________________________________________________________________________________________ 
+
+- ### Componente: Avatar - Aula 13
+    - Dentro do react existem dois grandes momentos onde criamos um componente 
+        - 1º: Quando algo repete muito em tela 
+        - 2º: Quando é possível tirar algo de um componente maior, sem que este mesmo pare de funcionar, deta forma, o componente maior fica mais "clean", com uma funcionalidade mais clara para receber a devida manutenção.
+___________________________________________________________________________________________________ 
