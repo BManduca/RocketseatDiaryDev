@@ -2,7 +2,6 @@
 <h1 align="center">
     RocketseatDiaryDev
 </h1>
-<img align="right" src"/RocketseatDiaryDev/aulas/01-fundamentos-reactjs/src/assets/" width="100px" />
 
 <h2>
     Sobre:
