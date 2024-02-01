@@ -174,4 +174,14 @@ ________________________________________________________________________________
 
         - Desestruturação: é um recurso onde é possível extrair elementos de arrays ou propriedades de objetos em variáveis separadas, tudo em uma única linha, transformando assim o seu estilo de codificação, bem mais conciso e melhorando a legibilidade.
         - As unidades relativas com relação a responsividade, dão um poder gigantesco na hora de codificar
+
 ___________________________________________________________________________________________________ 
+
+
+### Parte 3 -> Os motores do ReactW
+
+- ## Iterando no JSX
+
+    - Iteração: O Fato de repetir algo, ou seja, criar uma estrutura de repetição.
+    - para realizar a iteração, iremos utilizar o map, pois este método ele da um return e sendo assim, irá mostrar as informações que estão sendo iteradas.
+        - De maneira obrigatória, após chamar o método map, devemos aplicar um return, para que tudo seja retornado como esperado.
