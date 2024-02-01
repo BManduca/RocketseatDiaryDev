@@ -169,5 +169,9 @@ ________________________________________________________________________________
     - Dentro do react existem dois grandes momentos onde criamos um componente 
         - 1º: Quando algo repete muito em tela 
         - 2º: Quando é possível tirar algo de um componente maior, sem que este mesmo pare de funcionar, deta forma, o componente maior fica mais "clean", com uma funcionalidade mais clara para receber a devida manutenção.
-        - 13:30
+        - Quando queremos que todo Avatar, ou seja, o componente chamado para representar o avatar por exemplo presente em nossa aplicação, que não receber a propriedade harBorder como False, tenha por padrão ele com valor True e para isso podemos fazer da seguinte forma:
+            - const hasBorder = props.hasBorder !== false; -> isso quer dizer que a borda esta presente e se caso a propriedade nem for enviada, automaticamente, ela já é diferente de False.
+
+        - Desestruturação: é um recurso onde é possível extrair elementos de arrays ou propriedades de objetos em variáveis separadas, tudo em uma única linha, transformando assim o seu estilo de codificação, bem mais conciso e melhorando a legibilidade.
+        - As unidades relativas com relação a responsividade, dão um poder gigantesco na hora de codificar
 ___________________________________________________________________________________________________ 
