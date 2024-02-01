@@ -169,4 +169,5 @@ ________________________________________________________________________________
     - Dentro do react existem dois grandes momentos onde criamos um componente 
         - 1º: Quando algo repete muito em tela 
         - 2º: Quando é possível tirar algo de um componente maior, sem que este mesmo pare de funcionar, deta forma, o componente maior fica mais "clean", com uma funcionalidade mais clara para receber a devida manutenção.
+        - 13:30
 ___________________________________________________________________________________________________ 
