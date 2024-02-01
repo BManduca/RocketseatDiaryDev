@@ -2,7 +2,7 @@
 <h1 align="center">
     RocketseatDiaryDev <img src="">
 </h1>
-<img align="center" src"01-fundamentos-reactjs/src/assets/tecnologo_apple.png" width="200px" />
+<img align="center" src"/src/assets/tecnologo_apple.png" width="200px" />
 
 <h2>
     Sobre:
