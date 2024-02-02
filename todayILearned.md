@@ -184,4 +184,6 @@ ________________________________________________________________________________
 
     - Iteração: O Fato de repetir algo, ou seja, criar uma estrutura de repetição.
     - para realizar a iteração, iremos utilizar o map, pois este método ele da um return e sendo assim, irá mostrar as informações que estão sendo iteradas.
+        - Para este caso de iteração, não devemos escolher o forEach, pois, ele não tem um retorno
+            Ex.: se fizermos const algo = posts.forEach(post => {}), o algo sempre será void, ou seja ao usar o forEach como mencionado acima, nada será retornado em tela.
         - De maneira obrigatória, após chamar o método map, devemos aplicar um return, para que tudo seja retornado como esperado.
