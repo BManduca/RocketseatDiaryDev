@@ -1,7 +1,7 @@
-<img align="right" src="aulas/01-fundamentos-reactjs/src/assets/tecnologo_apple.png" width="30px"/>
 
 <h1 align="center">
     RocketseatDiaryDev
+    <img align="right" src="aulas/01-fundamentos-reactjs/src/assets/tecnologo_apple.png" width="30px"/>
 </h1>
 
 
