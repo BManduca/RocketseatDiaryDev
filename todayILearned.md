@@ -214,3 +214,20 @@ ________________________________________________________________________________
         - Estados -> são basicamente variáveis que eu gostaria que o componente monitorasse
         - o useState não retorna somente o valor da variável, na verdade são retornado duas 'coisas' dentro de um array, por isso geralmente usamos o conceito de desestruturação.
         - spread Operator -> faz a leitura da variável, que muitas vezes vem ser um array e cópia os valores existentes na váriavel
+
+
+    - ## Inserindo comentários (Programação declarativa)
+        - Programação imperativa
+            - O que deve ser feito (passo-a-passo)
+            -  ex: no nosso código temos => event.target.comment.value = '';
+                - é considerado imperativo, pois, estamos dando dizendo que é preciso limpar o valor da textarea do meu comentário.
+
+            - Mas dentro do react, geralmente evita utilziar a programação imperativa
+
+        - Programação declarativa
+            - ao invês de falarmos como eu espero atingir o meu resultado final (passo-a-passo), 
+            eu so declaro qual é o resultado que eu espero
+            - Quais seriam as condições para eu ter o resultado final.
+            - dentro do react geralmente iremos usar esse tipo de programação
+            - Através da forma declarativa no React, basicamente conseguimos repassar quais são as condições para as "coisas" acontecerem, mas não executamos as mesmas de forma imperativa.
+            - Dentro da nossa textarea, como escolhemos pela forma declarativa, através do onChang, sempre estaremos setando a function handleNewCommentChange e ao enviar o formulario, estaremos chamando a function handleCreateNewComment, que ira fazer de forma declarativa a reinicialização do campo textarea, refletindo assim sempre o valor que vai estar no estado e também ira gravar o comentário como esperado.
