@@ -187,3 +187,24 @@ ________________________________________________________________________________
         - Para este caso de iteração, não devemos escolher o forEach, pois, ele não tem um retorno
             Ex.: se fizermos const algo = posts.forEach(post => {}), o algo sempre será void, ou seja ao usar o forEach como mencionado acima, nada será retornado em tela.
         - De maneira obrigatória, após chamar o método map, devemos aplicar um return, para que tudo seja retornado como esperado.
+
+- ## Propriedades do Post
+    - Para trabalharmos com data, estaremos utilizando o intl
+        - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+
+    - intl permite que seja feito formatação de datas, números, pluralização, listas e muito mais
+
+    - Existem outras bibliotecas para se trabalhar com datas, como por exemplo:
+        - date-fns -> npm i date-fns
+            - doc: https://date-fns.org/v3.3.1/docs/format
+            - formatDistanceToNow -> para realizar o cálculo da data tomando como parâmetro a distância da entre a data da publicação com relação a data de hoje, por exemplo.
+                - parâmetros:
+                    - 1º a data em si
+                    - 2º o idioma (locale: ptBR)
+                    - 3º addSuffix: boolean
+
+
+        - No JS temos a seguinte forma também de trabalhar com dates
+            - toISOString()
+                - retorn a uma cadeia de caracteres (string) simplificada no formato ISO
+                extendido (ISO 8601), que é sempre de 24 ou 27 caracteres de tamanho -> YYYY-MM-DDTHH:mm:ss.sssZ ou ±YYYYYY-MM-DDTHH:mm:ss.sssZ, respectivamente. O fuso horário é sempre o deslocamento zero UTC, como denotado pelo sufixo "z".
