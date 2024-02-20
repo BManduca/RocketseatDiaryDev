@@ -208,3 +208,9 @@ ________________________________________________________________________________
             - toISOString()
                 - retorn a uma cadeia de caracteres (string) simplificada no formato ISO
                 extendido (ISO 8601), que é sempre de 24 ou 27 caracteres de tamanho -> YYYY-MM-DDTHH:mm:ss.sssZ ou ±YYYYYY-MM-DDTHH:mm:ss.sssZ, respectivamente. O fuso horário é sempre o deslocamento zero UTC, como denotado pelo sufixo "z".
+
+
+    - ## Estado (useState)
+        - Estados -> são basicamente variáveis que eu gostaria que o componente monitorasse
+        - o useState não retorna somente o valor da variável, na verdade são retornado duas 'coisas' dentro de um array, por isso geralmente usamos o conceito de desestruturação.
+        - spread Operator -> faz a leitura da variável, que muitas vezes vem ser um array e cópia os valores existentes na váriavel
