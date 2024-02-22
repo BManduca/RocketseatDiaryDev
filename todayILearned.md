@@ -210,24 +210,56 @@ ________________________________________________________________________________
                 extendido (ISO 8601), que é sempre de 24 ou 27 caracteres de tamanho -> YYYY-MM-DDTHH:mm:ss.sssZ ou ±YYYYYY-MM-DDTHH:mm:ss.sssZ, respectivamente. O fuso horário é sempre o deslocamento zero UTC, como denotado pelo sufixo "z".
 
 
-    - ## Estado (useState)
-        - Estados -> são basicamente variáveis que eu gostaria que o componente monitorasse
-        - o useState não retorna somente o valor da variável, na verdade são retornado duas 'coisas' dentro de um array, por isso geralmente usamos o conceito de desestruturação.
-        - spread Operator -> faz a leitura da variável, que muitas vezes vem ser um array e cópia os valores existentes na váriavel
+- ## Estado (useState)
+    - Estados -> são basicamente variáveis que eu gostaria que o componente monitorasse
+    - o useState não retorna somente o valor da variável, na verdade são retornado duas 'coisas' dentro de um array, por isso geralmente usamos o conceito de desestruturação.
+    - spread Operator -> faz a leitura da variável, que muitas vezes vem ser um array e cópia os valores existentes na váriavel
 
 
-    - ## Inserindo comentários (Programação declarativa)
-        - Programação imperativa
-            - O que deve ser feito (passo-a-passo)
-            -  ex: no nosso código temos => event.target.comment.value = '';
-                - é considerado imperativo, pois, estamos dando dizendo que é preciso limpar o valor da textarea do meu comentário.
+- ## Inserindo comentários (Programação declarativa)
+    - Programação imperativa
+        - O que deve ser feito (passo-a-passo)
+        -  ex: no nosso código temos => event.target.comment.value = '';
+            - é considerado imperativo, pois, estamos dando dizendo que é preciso limpar o valor da textarea do meu comentário.
 
-            - Mas dentro do react, geralmente evita utilziar a programação imperativa
+        - Mas dentro do react, geralmente evita utilziar a programação imperativa
 
-        - Programação declarativa
-            - ao invês de falarmos como eu espero atingir o meu resultado final (passo-a-passo), 
-            eu so declaro qual é o resultado que eu espero
-            - Quais seriam as condições para eu ter o resultado final.
-            - dentro do react geralmente iremos usar esse tipo de programação
-            - Através da forma declarativa no React, basicamente conseguimos repassar quais são as condições para as "coisas" acontecerem, mas não executamos as mesmas de forma imperativa.
-            - Dentro da nossa textarea, como escolhemos pela forma declarativa, através do onChang, sempre estaremos setando a function handleNewCommentChange e ao enviar o formulario, estaremos chamando a function handleCreateNewComment, que ira fazer de forma declarativa a reinicialização do campo textarea, refletindo assim sempre o valor que vai estar no estado e também ira gravar o comentário como esperado.
+    - Programação declarativa
+        - ao invês de falarmos como eu espero atingir o meu resultado final (passo-a-passo), 
+        eu so declaro qual é o resultado que eu espero
+        - Quais seriam as condições para eu ter o resultado final.
+        - dentro do react geralmente iremos usar esse tipo de programação
+        - Através da forma declarativa no React, basicamente conseguimos repassar quais são as condições para as "coisas" acontecerem, mas não executamos as mesmas de forma imperativa.
+        - Dentro da nossa textarea, como escolhemos pela forma declarativa, através do onChang, sempre estaremos setando a function handleNewCommentChange e ao enviar o formulario, estaremos chamando a function handleCreateNewComment, que ira fazer de forma declarativa a reinicialização do campo textarea, refletindo assim sempre o valor que vai estar no estado e também ira gravar o comentário como esperado.
+
+- ## Entendendo a key
+    - No React quando fazemos o uso de uma lista(iteração com map), cada component ou ate mesmo elemento, é importante que ele tenha uma propriedade chamada key e essa propriedade recebe qualquer valor, seja número, strings...so que é preciso passar pra ela, qual a informação única de cada um dos posts , ou seja, de cada um dos itens da minha lista 
+    - Porque a key precisa ser única?
+        - 3 principais momentos em que o component é renderizado novamente no React
+            Exemplo: Relembrando da aplicação.. toda a vez que alteramos a lista de comentários, é "chamado" o método setComments, colocando assim um novo comentário no final e ai um comentário aparece em tela
+        => Momentos em que o componente é totalmente renderizado
+        - Quando o state é alterado, todo o código do component, quando uma das varíaveis por exemplo, newCommentText ou comments é alterada, é executado novamente.
+        - Quando uma propriedade é alterada
+            - todo o código do componente é executado novamente
+        - Quando um componente pai renderiza novamente.
+
+    - Quando falamos sobre lista
+        -  no react, quando temos um post novo, é analisado através da key, qual post foi alterado por exemplo ou se tem um posto novo realmente e ai ele "recebe" o valor das key's e verifica após a atualização... por exemplo: 
+            Posts: 1 2 3 4
+                   1 2 3 4 5
+
+                   ao renderizar novamente, o código vai reparar que temos um post novo e que o restante já existia
+
+            - então desta forma ajuda o React a entender o que já existia em tela e o que não existia em tela.
+
+
+    - Porque não devemos usar o índice do array?
+        - const posts = [1,2,3,4]
+              => índices 0,1,2,3
+                - se caso eu alterasse o post 1 com o post 3, iria acarretar na renderização do component, poŕem, os índices não trocariam de lugar, então, basicamente foi so trocado os posts e não as posições... e isso pode confundir o codigo todo... porque desta forma, sempre vai parecer que os posts estão mudando de posição...
+        - Por isso é preciso usar uma informação, onde é possível identificar cada item da lista unicamente, mesmo que seja dado um f5 na tela, o valor precisa se manter o mesmo..
+
+- ## Comunicações entre componentes
+    - A única forma de comunicar um componente com outro, é através das suas propriedades
+    - Hoje não é somente necessário passar como propriedades para nossos componentes, as strings, números... podemos passar também Funções e é assim que se comunica um componente com outro dentro do react
+    - Da maneira como realizamos a comunicação entre componentes, buscamos criar a função deleteComment e enviamos como parâmetro para a função Comment e desta forma, o componente de comentário ele terá uma forma de se comunicar com o componente Pai, chamando essa função.
