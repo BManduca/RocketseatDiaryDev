@@ -263,3 +263,7 @@ ________________________________________________________________________________
     - A única forma de comunicar um componente com outro, é através das suas propriedades
     - Hoje não é somente necessário passar como propriedades para nossos componentes, as strings, números... podemos passar também Funções e é assim que se comunica um componente com outro dentro do react
     - Da maneira como realizamos a comunicação entre componentes, buscamos criar a função deleteComment e enviamos como parâmetro para a função Comment e desta forma, o componente de comentário ele terá uma forma de se comunicar com o componente Pai, chamando essa função.
+
+- ## Removendo comentários (imutabilidade)
+    - Imutabilidade: as variáveis não sofrem mutação, ou seja, nunca alteamos o valor de uma variável na memória, nos criamos um novo espaço na memória.
+    - Imutabilidade permite ser muito mais performático.
