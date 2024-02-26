@@ -265,5 +265,5 @@ ________________________________________________________________________________
     - Da maneira como realizamos a comunicação entre componentes, buscamos criar a função deleteComment e enviamos como parâmetro para a função Comment e desta forma, o componente de comentário ele terá uma forma de se comunicar com o componente Pai, chamando essa função.
 
 - ## Removendo comentários (imutabilidade)
-    - Imutabilidade: as variáveis não sofrem mutação, ou seja, nunca alteamos o valor de uma variável na memória, nos criamos um novo espaço na memória.
-    - Imutabilidade permite ser muito mais performático.
+    - Imutabilidade: as variáveis não sofrem mutação, ou seja, nunca alteramos o valor de uma variável na memória, nos criamos um novo espaço na memória.
+    - Imutabilidade permite ser muito mais performático, principalmente dentro do React, que precisa ficar comparando as variáveis, para verificar se as mesmas foram alteradas.

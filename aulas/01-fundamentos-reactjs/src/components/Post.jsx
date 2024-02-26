@@ -42,8 +42,12 @@ export function Post({ author, publishedAt, content }) {
     function deleteComment(commentToDelete) {
 
         const commentsWithoutDeleteOne = comments.filter(comment => {
+
+            // const commentsWithoutDeleteOne = comments.filter(comment => comment.id !== commentId)
+
             return comment !== commentToDelete
         })
+
         // atualizando a lista de comentários, removendo o que foi deletado
         setComments(commentsWithoutDeleteOne);
     }
