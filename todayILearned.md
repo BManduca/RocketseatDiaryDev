@@ -267,3 +267,7 @@ ________________________________________________________________________________
 - ## Removendo comentários (imutabilidade)
     - Imutabilidade: as variáveis não sofrem mutação, ou seja, nunca alteramos o valor de uma variável na memória, nos criamos um novo espaço na memória.
     - Imutabilidade permite ser muito mais performático, principalmente dentro do React, que precisa ficar comparando as variáveis, para verificar se as mesmas foram alteradas.
+
+- ## Validando formulário
+    - propriedade onInvalid, é sempre chamada sempre que o HTML identifica que tentamos realizar um submit de um form, só que o texto do campo era inválido, ou seja, pode estar vazio.
+    - setCustomValidity(): método usado para identificar qual mensagem de validação que queremos para o campo envolvido 
