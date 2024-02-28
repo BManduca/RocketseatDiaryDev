@@ -271,3 +271,23 @@ ________________________________________________________________________________
 - ## Validando formulário
     - propriedade onInvalid, é sempre chamada sempre que o HTML identifica que tentamos realizar um submit de um form, só que o texto do campo era inválido, ou seja, pode estar vazio.
     - setCustomValidity(): método usado para identificar qual mensagem de validação que queremos para o campo envolvido 
+
+- ## Realizando likes nos comentários
+    - Usaremos um estado para ficar observando o número de 'likes'
+    - Iniciar o estado com alguma informação que seja do mesmo tipo que a informação que vai ser armazenada
+    - ao adicionarmos o evento de onClick() para um button, ele sempre estará aguardando uma função, por isso devemos fazer o seguinte, por exemplo:
+        > 
+            <button onClick(handleLikeComment)> 
+                <ThumbsUp />
+                Aplaudir <span>{likeCount}</span>
+            </button>
+        
+        - porém, se passar dessa forma:
+            >
+                <button onClick(setLikeCount(likeCount+1))> 
+
+            -> Já estaria incorreto, pois, está sendo passado a execução de uma função em si e não a chamada da função.
+
+        - A única forma de realizar a chamada de uma função diretamente no onClick(), é fazendo através de uma arrowFunction:
+            > 
+                <button onClick(() => setLikeCount(likeCount+1))> 
