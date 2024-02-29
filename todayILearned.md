@@ -291,3 +291,13 @@ ________________________________________________________________________________
         - A única forma de realizar a chamada de uma função diretamente no onClick(), é fazendo através de uma arrowFunction:
             > 
                 <button onClick(() => setLikeCount(likeCount+1))> 
+
+- ## Entendendo closures no React
+    - Ao chamarmos por exemplo a função de alterar estado e como se o React criasse outro contexto para execução desse component, so que todo código presente no bloco da função por exemplo, sempre vai estar trabalhando no mesmo contexto, independente de quantas formas for acionada a chamada do método dentro da função
+    - O react permite que a gente passe para qualquer função de atualização de estado, uma função, através de uma arrow Function e dentro da mesma, devemos retornar o novo valor atualizado. Através deste modo o react permite que a gente possa acessar o valor mais recente da propriedade, como um argumento da função que esta sendo utilizada/chamada
+    - Sempre que for atualizar uma informação e essa informação depender do valor que ela tinha anteriormente, é sempre bom fazer atualização, usando esse padrão de funções.
+
+
+- ## Fundamentos do TypeScript
+    - TS nasceu como um superset, ou seja, um conjunto ferramental baseado na linguagem Javascript, para adicionar tipagem estática em cima de uma linguagem como Javascript que tem linguagem dinâmica.
+    
