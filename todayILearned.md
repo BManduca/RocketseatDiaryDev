@@ -301,3 +301,15 @@ ________________________________________________________________________________
 - ## Fundamentos do TypeScript
     - TS nasceu como um superset, ou seja, um conjunto ferramental baseado na linguagem Javascript, para adicionar tipagem estática em cima de uma linguagem como Javascript que tem linguagem dinâmica.
     
+- ## TypeScript no React
+    - Generics: tipagem dentro do TS
+
+- ## Extensão de interfaces
+    - Quando temos um component e o retorno dele é uma tag HTMl como image ou button e queremos permitir que os outros componentes que chamarem este mesmo como estamos fazendo dentro da nossa aplicação de exemplo...
+        - quando utilizamos o componente Comment, dentro dele é acionado o component Avatar e que eles possam além de ter propriedades que nós criamos como hasNorder por exemplo, as outras propriedades que possam ser acionadas pelo component e isso pode ser feito através das extensões presentes dentro do TS
+
+    - Para evitar de ter que ficar chamando todas as propriedades necessárias ou que pretendemos utilizar no momento de dar um export por exemplo em uma function, podemos utilizar um pequeno hack existente, que é o restOperator, que geralmente vem da seguinte forma:
+        >
+            ...nomedaprops
+
+    
