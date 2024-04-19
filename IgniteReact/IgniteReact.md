@@ -27,3 +27,24 @@
       - Quando o usuário requisita uma page da nossa aplicação
       - A Página é recebida pelo nosso servidor e este servidor contêm
       tanto o código front quanto o back-end da aplicação
+
+  - Bundlers
+    - Basicamente é fazer a divisão da aplicação JS em vários pequenos arquivos e um vai importando ao outro e ao final ao ir somando esses arquivos resulta na aplicação em si, que tantos esperamos.
+    - Ex. de bundler famoso:
+      - Webpack
+
+  - Compilers
+    - Compiladores de códigos, ou seja, ferramentas que convertem nosso código de um formato para outro.
+    - Ex.: Tentando executar um código React em nosso browser
+    - Um dos compiladores mais conhecidos: Babel
+      - Funciona da seguinte forma: pega sintaxes mais atualizadas do JS e converte para uma sintaxe mais compátiveis com os browsers.
+
+
+  - Verificando o que os browsers atualmente suportam e não suportam
+    - https://caniuse.com
+
+  - Alternativas para criação de projetos (bibliotecas mais famosas)
+    - Vite => https://vitejs.dev
+    - Snowpack => https://www.snowpack.dev
+
+    
