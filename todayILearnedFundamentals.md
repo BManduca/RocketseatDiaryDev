@@ -95,6 +95,26 @@ ________________________________________________________________________________
     - #### Curiosidades
         - o vite ele já traz o fast refesh de maneira nativa, ou seja, todas as alterações refletem de maneira automática no browser
 
+    - #### Projeto
+        - ReactDOM => faz a integração do React(Core) com a DOM
+        - DOM -> Document Object Model => representação do HTML através do JS
+        - Ao importar o ReactDOM, estamos integrando o React para funcionar em um ambiente WEB(Browser)
+
+        - Através do método createrRoot, é recebido um parâmetro, ao qual é o elemento raiz da página HTML
+            - Nesse caso o elemento raiz, é o root.
+
+        - O React apartir de agora irá criar todo o HTML, o CSS e todo o JS da nossa aplicação, dentro dessa div root, que é o elemento raiz da aplicação como comentado acima.
+
+        - Quando construímos uma aplicação SPA (Single Page Application), toda a interface é contruída apartir do JS, ou seja, é o próprio JS que constrói a interface da nossa aplicação.
+
+        - A interface não fica direto nos arquivos HTML e sim dentro do JS, aonde este mesmo, tem total controle sobre essa interface, desta forma fica muito mais fácil manipular a interface.
+
+        - Método Render
+            - Tem presente components do React, que funciona de maneira semelhante as tags do HTML
+            - Renderiza (mostra em tela) algo que é interno do React (StrictMode)
+
+
+
 ___________________________________________________________________________________________________ 
 
 - ### Componentes - Aula 04
@@ -104,7 +124,18 @@ ________________________________________________________________________________
     - Basicamente Componente é uma função que retorna HTML
         - todos os componentes da aplicação react precisão tem extensão JSX
             - JSX = JavaScript + XML (HTML)
-            - Basicamente é um arquivo JavaScript com HTML dentro dele 
+            - Basicamente é um arquivo JavaScript com HTML dentro dele
+    
+    - Default Exports vs. Named exports
+        - Default Exports: 
+            - Vantagens: 
+                - Pode dar nome na importação
+        - Named Exports: 
+            - É efetuado logo na criação da function
+                - Ex.: export function Example() {}
+            - No quesito de importação do component, é efetuado da seguinte forma:
+                - import { NameComponent } from "./"
+            - No caso de Named Exports, se vier acontecer um erro de nomenclatura, isso interfere diretamente na execução do código ou quando der o refresh
 ___________________________________________________________________________________________________ 
 
 - ### Propriedades - Aula 05
@@ -112,7 +143,40 @@ ________________________________________________________________________________
     - informações que são passadas para componentes
     - Assim como passamos para as tags HTML, os atributos necessários, nos componentes temos um comportamento parecido, porém o que passamos são propriedades.
     - Com os componentes conseguimos aproveitar o HTML, estilização, funcionamento com JS e acima de tudo diferenciação no uso ou na chamada do componente dentro da aplicação.
-    - Propriedades alteram elementos visuais de um componente sem que seja preciso perder a flexibilidade de abstrair um componente em outro arquivo para reaproveitar elementos que sejam comuns dentro desses componentes 
+    - Atributos quando colocamos no contexto de components do React, ele são chamados de propriedades.
+    - Propriedades alteram elementos visuais de um componente sem que seja preciso perder a flexibilidade de abstrair um componente em outro arquivo para reaproveitar elementos que sejam comuns dentro desses componentes
+    - Tomando como exemplo, ao passarmos propriedades para algum component que desejamos criar, é possível acessar essas propridades como parâmetros da minha função, desta forma, teremos um único parâmetro da função chamado props e dentro dessa props, iremos receber um objeto, onde teremos por exemplo author e content, no caso de um component post, usado como exemplo em nossa aplicação
+
+        - Ex.:
+
+            App.jsx
+            >
+                <div>
+                    <Post
+                        author="Brunno Manduca"
+                        content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse nobis nulla tempora! Repudiandae reiciendis dicta pariatur quos nihil quaerat commodi. Assumenda voluptatibus adipisci animi ullam suscipit rem eos architecto ut!"
+                    />
+                </div>
+
+        
+            Post.jsx
+            >
+
+                export function Post(props) {
+                    console.log(props);
+
+                    return <p>Post</p>
+                }
+
+    - Para acessarmos o valor de uma variável no React, ou seja, o valor contido na variável JS dentro de uma tag HTML, é necessário utilizar chaves por volta da mesma, ou seja, {}
+
+        > 
+            export function Post(props) {
+                return <p>{props.consent}</p>
+            }
+
+    - Através de components cosneguimos reaproveitar HTML, estilização, consegue reaproveitar até mesmo funcionamento JS, porém, consegue ter  diferenciação entre cada exibição desse component em tela, através das propriedades.
+    - As propriedades elas alteram elementos visuais de um component, sem a gente precisar perder a flexibilidade de abstrair um component em outro arquivo, para reaproveitar elementos que sejam comuns neste component 
 ___________________________________________________________________________________________________ 
 
 - ### CSS Modules - Aula 06
@@ -122,6 +186,10 @@ ________________________________________________________________________________
     - Vite CSS Modules => https://vitejs.dev/guide/features#css-modules
     - Para que um CSS fique totalmente atrelado a um componente e nao interfira em outros elementos, a extensão do arquivo deve ficar como (NomeDoArquivo).module.css
     - Quando trabalhamos com CSS modules, buscamos trabalhar essencialmente com Classes e não utilizar ID's ou qualquer outro tipo de identificação/seleção
+    - Utilizamos o Css modules, para que estilizações de components não afetem outros components e para que isso fique mais evidente, ao utilizarmos css modules, é criado uma classe com um nome baseado em um code hash, para que essas 'pequenas' confusões não aconteçam.
+
+    - Figma:
+        - https://www.figma.com/file/TsRFxgyhNfPh4r209CkSLW/Ignite-Feed-(Community)?type=design&node-id=0-1&mode=design&t=LQWTRHinOTlgyvpY-0
 ___________________________________________________________________________________________________ 
 
 
