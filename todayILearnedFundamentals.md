@@ -209,13 +209,25 @@ ________________________________________________________________________________
 - ### Components: Sidebar - Aula 08
     - div por padrão já é display-block, ou seja, sempre terá 100% da largura.
     - ao utilizarmos o grid-template-columns, podemos colocar valores fixos para algumas colunas, porém, podemos também utilizar 1fr, por exemplo, onde fr é a unidade utilizada no grid quando queremos dizer que algo vai ter um tamanho flexível.
-    - overflow: hidden => ele faz com que o elemento ocupe somente o espaço ou tamanho da sidebar que estamos utilizando na aplicação 
+    - overflow: hidden => ele faz com que o elemento ocupe somente o espaço ou tamanho da sidebar que estamos utilizando na aplicação
+    - object-fit
+        - cover: Funcionalidade para 'cortar' a imagem, ou seja, mostrar somente o centro da imagem e também não deixar a mesma ditorcida para o user, dando uma sensação de que a imagem foi mal carregada ou distorcida.
+    - flex-direction:
+        -column: para que os elementos fiquem posicionados um abaixo do outro.
+    - box-sizing:
+        - initial: Quando adicionamos borda, padding, margin e outline em um elemento, faz com que ocupe um espaço a mais e não esprema o elemento para que caiba dentro do container e ai entra a funcionalidade do initial, trazendo as configs originais do elemento.
     - https://phosphoricons.com/ => biblioteca para icons
+        - explore icons
+            - github -> React and instal library => npm i phosphor-react 
 ___________________________________________________________________________________________________ 
 
 - ### Components: Post - Aula 09
+    - habito de centralizar arquivos
+        - intuitos de ajudar ou já pensando em questões de manutenabilidade
+    
     - Tag time => Ela permite que passemos um atríbuto chamado 'dateTime'
-        - as propriedades que possuem a junção de mais de uma palavra, sempre utilizam camelCase
+        - as propriedades que possuem a junção de mais de uma palavra(nomes compostos), sempre utilizam camelCase
+
 ___________________________________________________________________________________________________ 
 
 - ### Estilizações do Post - Aula 10
@@ -223,6 +235,13 @@ ________________________________________________________________________________
         - significa que iremos aplicar algum estilo na header que esta diretamente dentro do post
         (8:10)
         - focus-within => é utilizado quando basicamente é encontrado alguma situação aonde houver foco em algum input, text-area ou qualquer elemento dentro do local aonde estamos trabalhando, no qual será aplicado alguma estilização, dentro deste container que estamos trabalhando.
+    - Para aplicar espaçamento entre dois posts, é bem fácil de se realizar, porém, podemos realizar uma verificação, de que so é para aplicar um espaçamento ou uma estilização, se caso existir um post anteriormente ao post em que estamos atuando no momento e esta ação é feita através da aplicação do '+', da seguinte forma:
+        > 
+            .post + .post {
+
+            }
+    - focus-within
+        - a funcionalidade principal do focus-within é que se houver algum foco em qualquer input ou text-area ou qualquer elemento dentro do elemento-pai que estamos mexendo, será aplicado uma estilização em algum elemento especifico dentro deste conteiner que estamos trabalhando, como por exemplo, um footer, um header...
          
 ___________________________________________________________________________________________________ 
 
@@ -230,7 +249,10 @@ ________________________________________________________________________________
 
     - utilizando display: flex, para deixar o avatar e o comentário lado a lado no box de comentário
     - Quando presenciamos uma div, envolvendo o elemento que vamos estilizar e que tem como propriedade o display: flex, podemos utilizar o flex: 1 em qualquer elemento dentro dessa div 'pai' e isso faz com que a div seja 'esticada', ou seja, ela vai acabar utilizando todo o espaço ali presente
-    - border: 0; -> para resetar o estilo padrão que os buttons tem no html 
+    - border: 0; -> para resetar o estilo padrão que os buttons tem no html
+    - flex-start, é uma propriedade própria do aling-items, que no caso do item de Trash que estavamos mexendo, deixará o item posicionado bem no canto direito e no topo do container.
+    - display: flex e o align-items: center, em conjunto para deixar totalmente alinhado a parte do ícone e do texto, que se encontram logo abaixo do comentário
+    - content: "\2022" => símbolo de ponto separados no HTML 
 ___________________________________________________________________________________________________ 
 
 - ### Componente: Avatar - Aula 13
@@ -242,6 +264,10 @@ ________________________________________________________________________________
 
         - Desestruturação: é um recurso onde é possível extrair elementos de arrays ou propriedades de objetos em variáveis separadas, tudo em uma única linha, transformando assim o seu estilo de codificação, bem mais conciso e melhorando a legibilidade.
         - As unidades relativas com relação a responsividade, dão um poder gigantesco na hora de codificar
+    
+    - Um ponto importante em questão de estilização e propriedades, é que no momento de construir uma propriedade em um elemento e este mesmo for do tipo boolean, para ressaltar o seu valor, este deve ser colocado entre {}, pois os booleans não existem no HTML
+
+    - No react, quando queremos enviar uma propriedade e que o valor dela seja True, podemos omitir o envio do valor, pode ser so passado o nome dado ao elemento/propriedade
 
 ___________________________________________________________________________________________________ 
 

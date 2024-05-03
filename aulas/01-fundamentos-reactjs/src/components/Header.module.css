@@ -6,6 +6,10 @@
     padding: 1.25rem 0;
 }
 
+.titleHeader {
+    margin: 0.1rem 1rem;
+}
+
 .header img {
     height: 2rem;
 }
