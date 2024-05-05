@@ -277,10 +277,14 @@ ________________________________________________________________________________
 - ## Iterando no JSX
 
     - Iteração: O Fato de repetir algo, ou seja, criar uma estrutura de repetição.
+    - Inicialmente porque não devemos utilizar um forEach() para fazer a varredura de um array?
+        - Não devemos, porque o retorno efetuado pelo forEach() é void, ou seja, não existe um retorno. Desta forma não aparecerá nada em tela
     - para realizar a iteração, iremos utilizar o map, pois este método ele da um return e sendo assim, irá mostrar as informações que estão sendo iteradas.
         - Para este caso de iteração, não devemos escolher o forEach, pois, ele não tem um retorno
             Ex.: se fizermos const algo = posts.forEach(post => {}), o algo sempre será void, ou seja ao usar o forEach como mencionado acima, nada será retornado em tela.
         - De maneira obrigatória, após chamar o método map, devemos aplicar um return, para que tudo seja retornado como esperado.
+
+    - Uma regra ou ate mesmo um cuidado: O Back-end não deve retornar HTML, pois, o mesmo ficará aberto a vulnerabilidades.
 
 - ## Propriedades do Post
     - Para trabalharmos com data, estaremos utilizando o intl
@@ -302,6 +306,8 @@ ________________________________________________________________________________
             - toISOString()
                 - retorn a uma cadeia de caracteres (string) simplificada no formato ISO
                 extendido (ISO 8601), que é sempre de 24 ou 27 caracteres de tamanho -> YYYY-MM-DDTHH:mm:ss.sssZ ou ±YYYYYY-MM-DDTHH:mm:ss.sssZ, respectivamente. O fuso horário é sempre o deslocamento zero UTC, como denotado pelo sufixo "z".
+
+        - Na questão de datas, para trabalhar com questão de 'há quantos dias foi efetuado o comentário', isso com base na data atual, podemos contar com a propriedade formatDistanceToNow, que está presente no date-fns e para fazer toda essa relação, será preciso passar como parâmetro a data da postagem, que neste caso nosso seria a 'publishedAt' e também como segundo parâmetro passariamos o locale, como ptBR e um addSuffix para ter um sufixo 'há' na frente da contagem, para dar um sinal de distanciamento da data da postagem.
 
 
 - ## Estado (useState)
