@@ -311,9 +311,12 @@ ________________________________________________________________________________
 
 
 - ## Estado (useState)
+    - preventDefault() -> Funcionalidade ao qual vai 'impedir' a página por exemplo que estamos trabalhando de efetuar um comportamento padrão
     - Estados -> são basicamente variáveis que eu gostaria que o componente monitorasse
     - o useState não retorna somente o valor da variável, na verdade são retornado duas 'coisas' dentro de um array, por isso geralmente usamos o conceito de desestruturação.
+    - Imutabilidade
     - spread Operator -> faz a leitura da variável, que muitas vezes vem ser um array e cópia os valores existentes na váriavel
+    - Quando criamos um state dentro de um component, ele permanece 'scoped', ou seja, presente somente no escopo somente daquele componente, em outras palavras, ao chamar diversas vezes o mesmo componente dentro da aplicação, estes não estarão compartilhando informações, porque as informações são diferentes e o React acaba controlando isso para nós.
 
 
 - ## Inserindo comentários (Programação declarativa)
@@ -367,9 +370,11 @@ ________________________________________________________________________________
 - ## Removendo comentários (imutabilidade)
     - Imutabilidade: as variáveis não sofrem mutação, ou seja, nunca alteramos o valor de uma variável na memória, nos criamos um novo espaço na memória.
     - Imutabilidade permite ser muito mais performático, principalmente dentro do React, que precisa ficar comparando as variáveis, para verificar se as mesmas foram alteradas.
+    - Criar um novo valor na memória, é mais rápido para o React realizar a comparação, se houve uma alteração ou não, do que alterar um valor que já existe na memória, ou seja, o react teria que ficar monitorando o espaço na memória, para 'ver' se mudou realmente ou não, qual era o valor antigo e qual o valor novo, para assim fazer a atualização
+    - Para remover itens de uma lista e do state do react, utilizamos o método de filter, aonde é percorrido a lista e se caso o resultado da comparação efetuada retornar True, é mantido na lista e se retornar False, é removido da lista, no caso de deletar comentários na nossa aplicação, vai ser filtrado e mantido apenas os comentários que forem diferentes do comentário que desejarmos deletar, gerando assim uma nova lista, sem o comentário deletado.
 
 - ## Validando formulário
-    - propriedade onInvalid, é sempre chamada sempre que o HTML identifica que tentamos realizar um submit de um form, só que o texto do campo era inválido, ou seja, pode estar vazio.
+    - propriedade onInvalid, é chamada sempre que o HTML identifica que tentamos realizar um submit de um form, só que o texto do campo era inválido, ou seja, pode estar vazio.
     - setCustomValidity(): método usado para identificar qual mensagem de validação que queremos para o campo envolvido 
 
 - ## Realizando likes nos comentários
@@ -395,21 +400,70 @@ ________________________________________________________________________________
 - ## Entendendo closures no React
     - Ao chamarmos por exemplo a função de alterar estado e como se o React criasse outro contexto para execução desse component, so que todo código presente no bloco da função por exemplo, sempre vai estar trabalhando no mesmo contexto, independente de quantas formas for acionada a chamada do método dentro da função
     - O react permite que a gente passe para qualquer função de atualização de estado, uma função, através de uma arrow Function e dentro da mesma, devemos retornar o novo valor atualizado. Através deste modo o react permite que a gente possa acessar o valor mais recente da propriedade, como um argumento da função que esta sendo utilizada/chamada
-    - Sempre que for atualizar uma informação e essa informação depender do valor que ela tinha anteriormente, é sempre bom fazer atualização, usando esse padrão de funções.
+    - Sempre que for atualizar uma informação e essa informação depender do valor que ela tinha anteriormente, é sempre bom fazer atualização, usando esse padrão de funções:
+        >
+            function handleLikeComment() {
+                setLikeCount((state) => {
+                    return state + 1;
+                });
+            }
 
 
 - ## Fundamentos do TypeScript
     - TS nasceu como um superset, ou seja, um conjunto ferramental baseado na linguagem Javascript, para adicionar tipagem estática em cima de uma linguagem como Javascript que tem linguagem dinâmica.
+    - TS ajuda a não cometer erros, até mesmo com relação ao tipo de variáveis
+    - O TS ajuda muito no momento de desenvolvimento, porque ele traz intelifência para o nosso editor de código
+    - const vs. let
+        - const => constant
+        - let => let it change
+    - No TS não precisamos de alguma forma declarar o tipo de uma variável, pois, o ts tem um funcionamento interno chamado inferência de tipos, porém, o que é isso?
+        - o TS basicamente lê e analisa o retorno de um código que desenvolvemos e meio que 'entende', que por exemplo, o retorno seria um number e desta forma, não precisamos evidenciar qual será o retorno, pois o próprio TS já capta essa informação.
+    - Com os TS é possível perceber nossos próprios erros, sem precisar executar nossa aplicação e isso pode trazer muito ganho, como segurança e confiança no momento do desenvolvimento e até mesmo na nossa percepção.
     
 - ## TypeScript no React
-    - Generics: tipagem dentro do TS
+    - Generics: tipagem dentro do TS, é como se fosse os parâmetros para o JS
+
+    - 
 
 - ## Extensão de interfaces
     - Quando temos um component e o retorno dele é uma tag HTMl como image ou button e queremos permitir que os outros componentes que chamarem este mesmo como estamos fazendo dentro da nossa aplicação de exemplo...
-        - quando utilizamos o componente Comment, dentro dele é acionado o component Avatar e que eles possam além de ter propriedades que nós criamos como hasNorder por exemplo, as outras propriedades que possam ser acionadas pelo component e isso pode ser feito através das extensões presentes dentro do TS
+        - quando utilizamos o componente Comment, dentro dele é acionado o component Avatar e que eles possam além de ter propriedades que nós criamos como hasBorder por exemplo, as outras propriedades que possam ser acionadas pelo component e isso pode ser feito através das extensões presentes dentro do TS
+
+    - Por uma questão de evitar um grande trabalho de ter que importar por exemplo todas propriedades que precisarmos ou que queremos utilizar nas Images, podemos efetuar a utilização de interfaces e ao darmos um extends, de maneira automática, estaremos 'trazendo' todas as informações que precisarmos, sem necessariamente ter que importar ou declarar uma a uma, agilizando assim todo nosso desenvolvimento, como podemos ver a seguir:
+        >
+            interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement>{
+                hasBorder?: boolean;
+            }
+
+        - Aonde estamos dando um extends na interface ImgHTMLAttributes e ao verificarmos mais a fundo, a mesma da um extends em outra interface chamada HTMLAttributes, ao qual já traz consigo mais informações ai qual podemos utilizar, então desta forma, o extends vem muito para agilizar e melhorar nosso desenvolver da aplicação, deixando assim nosso codigo mais clean e a própria interface mais inteligente.
 
     - Para evitar de ter que ficar chamando todas as propriedades necessárias ou que pretendemos utilizar no momento de dar um export por exemplo em uma function, podemos utilizar um pequeno hack existente, que é o restOperator, que geralmente vem da seguinte forma:
         >
             ...nomedaprops
 
-    
+    - Através do restOperator que estamos usando por exemplo em nossa function Avatar dentro da aplicação Ignite Feed, toda a propriedade que for passada para o avatar, vai ser automaticamente passada para a img, porque estamos 'pegando' todas as propriedades e repassando para dentro da img
+
+
+## Questões
+
+- ### Qual é uma das características de uma linguagem de tipagem dinâmica?
+    - Ser possível trocar o valor de uma variável para um tipo diferente do valor anterior em tempo de execução.
+
+- ### O que é o TypeScript?
+    - É uma linguagem de programação construída em cima do JavaScript, que traz tipagem e novas funcionalidades.
+
+- ### O código abaixo é válido no TypeScript? 
+
+    >
+        interface CreateUser { 
+            name: string; 
+            age: number; 
+        } 
+        
+        function createUser(user: CreateUser) { 
+            // ... 
+        } 
+        
+        createUser('Diego Fernandes');
+
+    - Não, não é válido.
