@@ -52,5 +52,96 @@
     - Criação de uma pasta @types
         - arquivo styled.d.ts
             - mas porque o d.ts?
-                - Significa que eu so vou ter código de definição de tipos do TS e nunca código TS ou qualquer coisa assim.
-                
+                - Significa que eu so vou ter código de definição de tipos do TS e nunca código JS ou qualquer coisa assim.
+
+    - typeof => Função específica do TS (type operator)
+
+    - declare module => modo de criar uma tipagem para o modulo que esta sendo utilizado no momento
+        - Isso irá inferir no momento em que importarmos o modulo em algum arquivo, a tipagem que será 'puxada', será a que for definida dentro do escopo em questão
+
+- ## Global Styles
+
+    - No style-components, os estilos globais serão com sintaxe JS e não CSS
+    - inicialmente usamos função própria do style-components, chamada createGlobalStyle e apartir dela conseguimos definir todo o escopo de estilização mais global da nossa aplicação
+
+
+- ## Configurando o ESLint
+    - ESLint => EcmaScript Linting
+        - Linting => Processo para validar que teu código segue padrões estipulados pelos criadores do projeto em si.
+
+     - Instalação
+        - npm i eslint -D
+
+        - pacote especifico do eslint, orientado e criado pela rocketseat
+            - npm i @rocketseat/eslint-config -D
+                - esse pacote ele traz alguns padrões de escrita de código para JS e claro que pode ser criado o próprio padrão, mas hoje estaremos utilizando este padrão criado pela escola.
+
+        - para criação de configs pessoais:
+            - npx eslint --init
+            - responder as perguntas feitas pelo vscode e assim, será criado sua própria config do eslint e ficando assim um padrão próprio do seu projeto.
+
+        - criando arquivo eslintrc.json, para aplicar um extends com o nome do pacote e como o pacote da rocket, tem diversas configs, iremos pegar a própria do react:
+            >
+                {
+                    "extends": "@rocketseat/eslint-config/react"
+                }
+
+        - Para testar:
+            - rodar no terminal: 
+                - npx eslint src --ext .ts,.tsx
+                    - src: pasta aonde esta os arquivos
+                    - --ext: a extensão dos arquivos que será verificado os erros
+                    - logo mem seguida adicionar as extensões
+
+        - Para corrigir os erros de maneira geral:
+            - rodar o mesmo comando acima, porém, com --fix adicionado ao final do comando:
+                - npx eslint src --ext .ts,.tsx --fix
+
+
+- ## Páginas e rotas
+    - React Router Dom
+
+        - inicialmente para trabalhar com as rotas, iremos utilizar no projeto a famosa biblioteca react-router e como trbalharemos com aplicações Web, iremos usar especificamente o react-router-dom
+
+        - instalação:
+            - npm i react-router-dom
+
+    - BrowserRouter
+        - Ao analisarmos a criação e importação de qualquer rota/page na nossa aplicação, veremos que no console, vai dar vários problemas inicialmente, desta forma, se analisarmos a [documentação do react-router](https://github.com/remix-run/react-router) e for no [getting-started](https://github.com/remix-run/react-router/blob/main/docs/start/_tutorial.md), veremos que a gente precisa importar o BrowserRouter do react-router-dom e realizar um wrap do nosso app dentro BrowserRouter 
+
+    - Contexts-Providers
+        - São components que basicamente não tem efeito visual nenhum, mas eles produzem um contexto para os components que estão dentro deles, ou seja, informações para estes components saberem do contexto de 'fora' ou digamos do mundo externo, para que estes obtenham informações do que eles já possuem 'naturalmente' ao serem criados
+
+- ## Layout de Rotas
+
+    - No [Layout](https://www.figma.com/design/ELte8mBmDArgUI3z3IxNwW/Ignite-Timer-(Community)?node-id=313-1874&t=PQkB3aBu26wW0jf7-0) que temos hoje, podemos verificar que temos partes em comuns nas pages da aplicação e sendo assim, para simplesmente ter essa parte 'constante' nas pages(routes), podemos criar um component, como por exemplo, um Header que será uma parte constante na aplicação e o conteúdo realmente vindo logo na sequência e está questão de transição por exemplo entre routes(pages), podemos fazer com base na utilização do component Outlet que vem de dentro do react-router-dom, que é nada mais que um espaço ao qual será inserido um conteúdo.
+
+    - Dentro do react-router-dom, temos um component chamado NavLink e este nos auxiliará na hora da transição entre as rotas, este será utilizado no lugar das ancoras que estavamos utilizando no inicio do projeto.
+
+        >
+            <HeaderContainer>
+                <img src={logoIgnite} alt="" />
+                <nav>
+                    <a href="">
+                        <Timer size={24} />
+                    </a>
+                    <a href="">
+                        <Scroll size={24} />
+                    </a>
+                </nav>
+            </HeaderContainer>
+
+        >
+            <HeaderContainer>
+                <img src={logoIgnite} alt="" />
+                <nav>
+                    <NavLink to="">
+                        <Timer size={24} />
+                    </NavLink>
+                    <NavLink to="">
+                        <Scroll size={24} />
+                    </NavLink>
+                </nav>
+            </HeaderContainer>
+
+        - obs.: Na ancora usamos a propriedade href, já no NavLink usamos o to
