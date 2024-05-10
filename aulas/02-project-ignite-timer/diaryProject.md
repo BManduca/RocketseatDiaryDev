@@ -145,3 +145,19 @@
             </HeaderContainer>
 
         - obs.: Na ancora usamos a propriedade href, já no NavLink usamos o to
+
+
+- ## Aprimorando Inputs
+    - Elemento HTML datalist
+        - Lista de sugestões para um input
+
+- ## Página: History
+    - Em aplicações mobile não existe uma forma de representar uma tabela de forma satisfatoria, por isso na aplicação envolvemos a tabela com uma div e quando for acessado em um dispositivo mobile e a tela estiver menor, será feito com que o usuário final consiga dar scroll na tabela, ou seja, consiga arrastar de um lado para o outro na tela, vendo assim a tabela como um todo.
+    - Overflow: auto
+        - Faz com que  se o tamanho da tabela, for maior do que o cantainer que ela esta inserida, gere automaticamente uma barra de rolagem 
+
+
+    - border-collapse: collapse
+
+- ## Status (Component)
+    - Nosso component de status na aplicação, com base no styled-component, não precisa necessariamente ser um arquivo separado, so porque ele é visualmente diferente e sim pode ser somente um elemento estilizado, 
