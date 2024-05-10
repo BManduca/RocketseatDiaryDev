@@ -161,3 +161,5 @@
 
 - ## Status (Component)
     - Nosso component de status na aplicação, com base no styled-component, não precisa necessariamente ser um arquivo separado, so porque ele é visualmente diferente e sim pode ser somente um elemento estilizado, 
+
+    - 
