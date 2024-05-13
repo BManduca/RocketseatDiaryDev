@@ -162,4 +162,81 @@
 - ## Status (Component)
     - Nosso component de status na aplicação, com base no styled-component, não precisa necessariamente ser um arquivo separado, so porque ele é visualmente diferente e sim pode ser somente um elemento estilizado, 
 
-    - 
+
+- ## Controlled vs Uncontrolled
+    - Controlled
+        - Manter em tempo real a informação que o usuário insere na nossa aplicação, dentro do state/variavel dentro do componente
+        - Traz uma certa 'fluides' na interface
+        - Toda vez que realizamos uma atualização de estado, acabamos provocando uma nova renderização, ou seja, recalcula todo o conteúdo do component do estado que foi alterado e esse recalcular todo o conteúdo do component, não necessariamente é lento, mas ao termos interfaces muito complexas , com bastante informação, isso pode resultar em um gargalo
+
+    - Uncontrolled
+        - Busca a informação do valor do input, somente quando precisarmos dela.
+        - São por exemplo quando termos formulários com uma quantidade bem grande de inputs, e se caso fosse de modo controlled, imagina a cada interação com o input, a aplicação realizar a renderização da tela novamente, ficaria excessivamente lento, desta forma, fica mais viável utilizar o uncontrolled.
+
+        > 
+
+            export function main() {
+                function handleSubmit(event) {
+                    event.target.task.value
+                }
+
+                return (
+                    <HomeContainer>
+                        <form onSubmit={handleSubmit} action="">
+                        <FormContainer>
+                            <label htmlFor="task">Vou trabalhar em</label>
+                            <taskInput
+                                id="task"
+                                name="task"
+                                list="task-suggestions"
+                                placeholder="Dê um nome para o seu projeto"
+                            />
+
+                            ....
+
+                        </FormContainer>
+                    </HomeContainer>
+                )
+            }
+
+        - Porém, ao utilizarmos o uncontrolled, perdemos a fluidez, pois, não teremos mais acesso ao valor inserido no input letra a letra e ai não temos mais como trabalhar por exemplo com ativação ou desativação de algum component, mas ganhamos em performance, então essa decisão é tomada em momentos.
+            - Controlled
+                - Formulários simples, com poucos campos, com interface simples, como por exemplo formulário de login, de cadastro.
+            - Uncontrolled
+                - Formulário aonde não monitoramos o valor digitado em tempo real, como dashboards/painéis de cadastro de jornada/trilhas contendo aulas, informações de módulos e etc.
+            
+
+- ## React Hook Form
+    - Biblioteca de formulários
+        - trabalha tanto de uma maneira controlled quanto uncontrolled, ou seja, conseguimos trabalhar com performance sem abrir mão da flexibilidade, da fluidez, da interatividade com os campos do nosso formulário
+
+    - Hooks do React
+        - Funções dentro do react que utilizam do prefixo use, aonde ela acomplam uma funcionalidade em um component existente
+
+    - Instalação
+        - npm i react-hook-form
+
+    - useForm
+        - Função aonde retorna um objeto, para criação do form
+        - Quando usamos o useForm, é como se eu estivesse criando um novo formulário na minha aplicação
+
+    - Função register
+        - retorno desta função são alguns métodos, que são os métodos que utilizamos para trabalhar com inputs no JS, então, como exemplo, podem ser devolvidos funções como onChange, onBlur, onFocus...
+        - método para adicionar um input ao nosso formulário
+        - 'quais campos eu vou ter no meu formulário'
+
+        >
+            function register(name: string) {
+                return (
+                    onChange: () => void,
+                    onBlur: () => void,
+                    onFocus: () => void,
+                )
+            }
+
+    - Função handleSubmit
+        - 
+
+    - Função watch
+        - Função aonde estaremos observando por exemplo o campo task(campo registrado dentro do register) e desta forma saberemos o valor, do meu campo em tempo real
+        - Se o campo de task for diferente de vazio, iremos habilitar o button 
