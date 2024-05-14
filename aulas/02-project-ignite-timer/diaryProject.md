@@ -240,3 +240,164 @@
     - Função watch
         - Função aonde estaremos observando por exemplo o campo task(campo registrado dentro do register) e desta forma saberemos o valor, do meu campo em tempo real
         - Se o campo de task for diferente de vazio, iremos habilitar o button 
+
+
+- ## Validando formulário
+    - Por padrão o react-hook-form não traz nada de validação, pois ela é considerada uma biblioteca mais enxuta, aonde ela tem menos funcionalidades e utiliza de outras bibliotecas feitas propriamente para validação e que são muito boas nesse quesito, ficarem integradas a ele e não ter que criar toda uma estrutura de validação junto na biblioteca, sabendo que existem bibliotecas feitas somente para isso.
+
+    Bibliotecas para validação:
+    * [Yup](https://github.com/jquense/yup)
+        - Instalação --> npm i yup
+    * [Joi](https://github.com/hapijs/joi)
+        - Instalação --> npm i joi
+    * [Zod](https://github.com/colinhacks/zod)
+        - Instalação --> npm i zod
+
+    - para que a integração do react-hook-form funcione com essas bibliotecas, é necessário instalar outra biblioteca chamada @hookform/resolvers, ela permite a integração do react-hook-form com as libs de validação
+
+    - Ao importarmos a lib do zod na nossa aplicação, veremos que da um pequeno problema ao realizarmos da seguinte forma: import zod from 'zod', pois, a lib do zod não tem um export default, por isso, a importação é realizado da seguinte forma, conforme uma técnica do EcmaScript: import * as zod from 'zod'
+
+    - Para visualizar os erros de validação, podemos utilizar o formState que está presente dentro do useForm e de dentro do formState, existe uma variável chamada errors
+
+    - Aqui vale relembrar que nunca podemos utilizar uma variável JS, como o exemplo a seguir, dentro do TS, o próprio não conseguiria entender
+        >
+            const newCycleFormValidationSchema = zod.object({
+                task: zod.string().min(1, 'Informe a tarefa!'),
+                minutesAmount: zod.number()
+                    .min(5, 'O ciclo precisa ser de no mínimo 5 minutos.')
+                    .max(60, 'O ciclo precisa ser de no máximo 60 minutos.'),
+            })
+
+        - desta forma, é preciso converter a variável JS em uma tipagem, em algo específico do TS e para isso, usamos sempre o typeof
+
+            >
+                type NewCycleFormData = zod.infer<typeof newCycleFormValidationSchema>
+
+
+- ## Resetando formulário
+    - Dentro do useForm existe uma função chamada reset() e chamamos essa função dentro da nossa função de submit da aplicação, que automaticamente vai limpar os campos do formulário para o valor original
+    - O reset funciona voltando os campos do formulário, para os valores que estão dentro do defaultValues e se caso esquecer de registrar qualquer campos dentro do defaultValues, ele não será retornado ao seu valor original
+
+- ## Iniciando novo ciclo
+    - Na aplicação hoje nos temos um ciclo ativo por momento
+    - Sendo assim, temos duas formas de controlar qual o ciclo que está ativo no momento:
+        1. Adicionando um parametro boolean, para mostrar se o ciclo está ativo ou não
+            > 
+                interface Cycle {
+                    id: string
+                    task: string
+                    minutesAmount: number
+                    isActive: boolean
+                }
+
+            - Mas temos um problema com relação a esta forma, que é quando colocamos um novo ciclo como ativo, teremos que percorrer os outros ciclos até, eu conseguir achar qual que era que estava ativo antes, para colocar o isActive como False, ou seja, toda a vez que 'startar' um novo ciclo (colocando como ativo), terei que mudar um outro ciclo que já estava ativo para falso, resultando assim em duas modificações no mínimo, para conseguir retornar o novo ciclo como ativo.
+
+        2. Manter um estado como o id do ciclo que esta ativo, que pode ser uma string ou nulo, iniciando como nulo
+
+            >
+                const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+
+            * aplicar o estado dentro da nossa função de criação de novo ciclo
+
+                >
+                    function handleCreateNewCycle(data: NewCycleFormData) {
+
+                        const id = String(new Date().getTime())
+
+                        const  newCycle: Cycle = {
+                            id,
+                            task: data.task,
+                            minutesAmount: data.minutesAmount,
+                        }
+
+                        setCycles((state) => [...state, newCycle]);
+                        setActiveCycleId(id)
+
+                        reset()
+                    }
+
+
+- ## Criando countdown
+    - Armazenando o total de segundos
+        >
+            const totalSeconds = activeCycle ? activeCycle.minutesAmount * 60 : 0
+
+    - Armazenando a quantidade de segundos 'current'
+        >
+            const currentSeconds = activeCycle ? totalSeconds - amountSecondsPassed : 0
+
+    - Armazenando o valor dos minutos, caso aconteça de retornar um valor 'quebrado' como o resultado da divisão
+        - Através do Math.floor, conseguimos corrigir essa questão, pois realizamos o arredondamento do valor
+
+        >
+            const minutesAmount = Math.floor(currentSeconds / 60)
+
+    - Armazenando os segundos que retornam do resto da divisão do currentSeconds por 60
+
+        >
+            const secondsAmount = currentSeconds % 60
+
+    - Função padStart
+        - Método para preenche a string original com um determinado caractere, ou conjunto de caracteres(várias vezes, se necessário) até que a string resultante atinja o comprimento fornecido.
+
+        >
+            const minutes = String(minutesAmount).padStart(2,'0')
+            const seconds = String(secondsAmount).padStart(2,'0')
+
+
+    - Apresentando os valores em tela
+
+        > 
+            <CountDownContainer>
+                <span>{minutes[0]}</span>
+                <span>{minutes[1]}</span>
+                <Separator>:</Separator>
+                <span>{seconds[0]}</span>
+                <span>{seconds[1]}</span>
+            </CountDownContainer>
+
+
+- ## O hook useEffect
+    - useEffect
+        - use -> hooks
+        - Effect -> Side-effect | Efeito Colateral
+            - será uma ação que vai ser desencadeada por causa de uma ação anterior
+
+            - Permite ficar monitorando mudanças em uma varíavel e toda a vez que essa varíavel mudar, independente de qual o motivo, qual a origem, quem alterou essa varíavel, seja disparado uma função para trabalahr nessa questão
+
+            - useEffect, recebe dois parâmetros:
+                1. Qual função que vai ser executada
+                2. Quando que a mesma vai ser executada, ou seja, será um array, basicamente passando a varíavel que vai ser monitorada
+
+                >
+                    useEffect(() => {}, [])
+
+            - Com o useEffect(), podemos falar exatamente quais varíaveis eu quero monitorar
+            - O useEffect executa em um primeiro momento, no ínicio, assim que o component em que ele se encontra for exibido em tela por exemplo.
+            - E em um segundo momento, toda a vez que uma das varíaveis que passamos no array de dependências, for alterada ou mudada, porém, quando não passamos nada nesse array, ele será executado uma única vez, que é quando o component aparecer em tela
+                - Executando uma única vez e trazendo os repos da minha page do git
+                >
+                    useEffect(() => {
+                        fetch('https://github.com/users/BManduca/repos')
+                        .then(response => response.json())
+                        .then(data => {
+                            setList(data.map((item:any) => item.full_name))
+                        })
+                    }, [])
+
+            - Ponto importante: Dificilmente utilizamos o useEffect para realizar a atualização de um estado
+
+- ## Reduzindo o countdown
+    - Package date-fns
+        - install: npm i date-fns
+        - importar differenceInSeconds
+
+        - differenceInSeconds
+            - Calcula a diferença em duas datas em segundos, para a fazer a geração do setAmountSecondsPassed
+            - recebe como parâmetros(tomando como exemplo a aplicação que estamos construindo):
+                - passamos como primeiro param a data atual (new Date())
+                - passamos como segundo param, a data que foi dado o start no cycle atual (activeCycle.startDate)
+
+- ## Mudando title da página
+    - Curiosidade: de Dentro do useEffect podemos ter um retorno e esse retorno sempre será uma função
+        - essa função ela tem uma responsabilidade, que é para quando o useEffect for executado novamente, porque houve alguma mudança nas varíaveis que estão sendo monitoradas (depedências), como por exemplo resetar ou 'limpar' o efeito do useEffect anterior, ao iniciar um newCycle
