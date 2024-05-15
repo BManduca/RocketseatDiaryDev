@@ -363,7 +363,7 @@
         - Effect -> Side-effect | Efeito Colateral
             - será uma ação que vai ser desencadeada por causa de uma ação anterior
 
-            - Permite ficar monitorando mudanças em uma varíavel e toda a vez que essa varíavel mudar, independente de qual o motivo, qual a origem, quem alterou essa varíavel, seja disparado uma função para trabalahr nessa questão
+            - Permite ficar monitorando mudanças em uma varíavel e toda a vez que essa varíavel mudar, independente de qual o motivo, qual a origem, quem alterou essa varíavel, seja disparado uma função para trabalhar nessa questão
 
             - useEffect, recebe dois parâmetros:
                 1. Qual função que vai ser executada
@@ -401,3 +401,272 @@
 - ## Mudando title da página
     - Curiosidade: de Dentro do useEffect podemos ter um retorno e esse retorno sempre será uma função
         - essa função ela tem uma responsabilidade, que é para quando o useEffect for executado novamente, porque houve alguma mudança nas varíaveis que estão sendo monitoradas (depedências), como por exemplo resetar ou 'limpar' o efeito do useEffect anterior, ao iniciar um newCycle
+
+- ## Interromper Ciclo
+    - Ao iniciarmos um ciclo, seria interessante que o button trocasse de verde para uma cor por exemplo vermelha e que o texto fosse de Começar para interromper, desta forma, essa ação pode ser feita da seguinte forma:
+
+        * Através de condicional ternário
+            > 
+                { activeCycle ? (
+                    <StopCountdownButton type="button">
+                        <HandPalm size={24} />
+                        Interromper
+                    </StopCountdownButton>
+                    ) : (
+                    <StartCountdownButton disabled={isSubmitDisabled} type="submit">
+                        <Play size={24} />
+                        Começar
+                    </StartCountdownButton>
+                    ) 
+                }
+
+            * Aonde caso o ciclo esteja ativo, será 'mostrado' um button para interromper o processo e caso contrário, será mostrado o button inicial para começar um novo ciclo
+
+            * Para 'agilizar' e deixar mais simples o processo de estilização, podemos pegar a estilziação que já existia para o StartCountdownButton e transformar em um BaseCountdownButton:
+
+                >
+                    export const BaseCountdownButton = styled.button`
+                        width: 100%;
+                        border: 0;
+                        padding: 1rem;
+                        border-radius: 8px;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        gap: 0.5rem;
+                        font-weight: bold;
+
+                        cursor: pointer;
+
+                        color: ${(props) => props.theme['gray-100']};
+
+                        &:disabled {
+                            opacity: 0.7;
+                            cursor: not-allowed;
+                        }
+                        
+                    `
+
+            * Em seguida, criamos estilizações para cada tipo de button existente:
+
+                - StartCountdownButton
+                    >
+                        export const StartCountdownButton = styled(BaseCountdownButton)`
+                            background: ${(props) => props.theme['green-500']};
+
+                            &:not(:disabled):hover {
+                                background: ${(props) => props.theme['green-700']};
+                            }
+                        `
+
+                - StopCountdownButton
+                    >
+                        export const StopCountdownButton = styled(BaseCountdownButton)`
+                            background: ${(props) => props.theme['red-500']};
+
+                            &:not(:disabled):hover {
+                                background: ${(props) => props.theme['red-700']};
+                            }
+                        `
+
+
+    - Para deixar inativo os campos de input, enquanto um ciclo estiver ativo, podemos utilizar o disabled, passando o activeCycle, com uma validação booleana
+
+        >
+            disabled={!!activeCycle}
+
+        
+        * o !! significa validação booleana
+
+    - Adicionando o campo interruptedDate como campo opcional na interface Cycle e Criando uma função para interromper o Ciclo ativo:
+
+        > 
+            interface Cycle {
+                id: string;
+                task: string;
+                minutesAmount: number;
+                startDate: Date;
+                interruptedDate?: Date;
+            }
+
+        > 
+            function handleInterruptCycle() {
+
+                setCycles(cycles.map(cycle => {
+                if (cycle.id === activeCycleId) {
+                    return {
+                    ...cycle,
+                    interruptedDate: new Date()
+                    }
+                } else {
+                    return cycle;
+                }
+                }))
+
+                setActiveCycleId(null);
+
+            }
+
+    - No react é bom lembrar que nunca podemos alterar uma informação sem seguir os princípios da imutabilidade 
+
+
+- ## Separando components
+
+    - Há dois grande momentos e duas formas de repartir componentes, transformando assim componentes maiores em componentes menores 
+
+        1. Primeira forma é quando percebemos que algum componente está sendo utilizado muitas vezes dentro da sua aplicação
+
+        2. Outro momento é quando percebemos que tem partes de um componente maior que elas podem funcionar sozinhas sem depender do restante  
+
+- ## Prop Drilling no React
+    - Prop Drilling Quando a gente tem muitas propriedades APENAS para comunicação entre componentes
+
+    - Para contornar este problema no react, temos um conceito no react chamado Context API
+        - o Context API permite compartilhar informações entre vários components ao mesmo tempo
+        - a Context API não precisa utilziar de propriedades
+        - É como se fossem informações globais e que todos os componentes podem ter acesso, todos os componentes podem modificar as informações e quando modificas, indepentende de quem modificou as informações, todos os componentes que dependendiam e dependem dessas informações são atualizados.   
+
+- ## Entendendo contextos
+
+    - Context API
+        - No react é trabalhoso passar os dados entre componentes, especialmente em aplicações maiores.
+        - A Context API é uma solução nativa do React para esse desafio. Em vez de enviar informações através de múltiplos níveis de componentes, você cria um "contexto" que disponibiliza esses dados para qualquer componentes que queira "escutá-los"
+
+        ![](./src/assets/transmition_data_context_api.png)
+
+        - Context API se destaca por ser integrada diretamente ao React, trazendo menos dependências e uma curva de aprendizado mais 'amigável'
+
+        - O TypeScript nos ajuda a entender e garantir que os tipos (as propriedades) dos nossos dados estejam corretos e com ele podemos evitar bugs.
+        - Context API ajuda a gerenciar dados e o TypeScript garante que o formato desses dados estejam certos
+
+- ## Convertendo para contextos
+
+    - Exemplo de funcionalidade do Context API
+        - nossa função markCurrentCycleAsFinished, foi definida no component Home, porque ela usa da função setCycles, que so existe dentro do componente Home e em seguida enviamos essa função dentro do contexto, assim todos os componentes que estão dentro deste contexto, tem acesso a ela e quando o componente Countdown, chama a dunção markCurrentCycleAsFinished, na verdade ele ta chamando a função que foi definida la no componente Home, que vai alterar o estado de ciclos
+
+            * Estado de ciclos
+
+                >
+                    const [ cycles, setCycles ] = useState<Cycle[]>([])
+
+            * Função markCurrentCycleAsFinished no component Home
+
+                >
+                    function markCurrentCycleAsFinished() {
+                        setCycles((state) => 
+                        state.map(cycle => {
+                            if (cycle.id === activeCycleId) {
+                            return {
+                                ...cycle,
+                                finishedDate: new Date()
+                            }
+                            } else {
+                            return cycle
+                            }
+                        })
+                        )
+                    }
+
+            * Definição do context no component Home
+
+                >
+                    interface CyclesContextType {
+                        //informações que serão guardadas dentro do contexto
+                        activeCycle: Cycle | undefined
+                        activeCycleId: string | null
+                        markCurrentCycleAsFinished: () => void
+                    }
+
+            * Adição do markCurrentCycleAsFinished dentro da criação de um objeto dentro do component Countdown, sendo do tipo useContext(CyclesContext)
+
+                >
+                    const { activeCycle, activeCycleId, markCurrentCycleAsFinished } = useContext(CyclesContext)
+
+            * Realizada a chamada da const markCurrentCycleAsFinished, dentro do useEffect e passa o mesmo para ficar sendo observado quando for atualizado como as contantes que já se encontram lá presente 
+
+                >
+                    useEffect(() => {
+                        /* 
+                        é preciso definir o interval como number, pois o JS defini o 
+                        interval como um id ou uma referência para deletar posteriormente
+                        */
+                        let interval: number;
+
+                        if (activeCycle) {
+                        interval = setInterval(() => {
+
+                            const secondsDifference = differenceInSeconds(
+                            new Date(),
+                            activeCycle.startDate
+                            )
+                            /*
+                            Se o total de segundos que já foi percorrido já foi igual
+                            ou maior que o número de tempo que o ciclo tem, vai ser marcado como completo
+                            */
+
+                            if (secondsDifference >= totalSeconds) {
+                            markCurrentCycleAsFinished()
+                            setAmountSecondsPassed(totalSeconds)
+                            clearInterval(interval)
+                            } else {
+                            /*
+                                e se caso ainda não foi completado, ou seja, não chegou a zero, 
+                                irei continuar abaixando a quantidade de segundos
+                            */
+                            setAmountSecondsPassed(secondsDifference)
+                            }
+
+                        }, 1000)
+                        }
+
+                        return () => {
+                        clearInterval(interval)
+                        }
+
+                    }, [activeCycle, totalSeconds, activeCycleId, markCurrentCycleAsFinished])
+
+
+- ## Contexto no formulário
+
+    - No react-hook-form ele oferece um contexto próprio, ao qual podemos utilizar, desta forma, em vez de utilizar de forma desestruturada, conforme a seguir:
+
+        >
+            const { register, handleSubmit, watch, reset } = useForm<NewCycleFormData>({
+                resolver: zodResolver(newCycleFormValidationSchema),
+                    defaultValues: {
+                    task: '',
+                    minutesAmount: 0,
+                }
+            })
+
+    - usaremos da seguinte forma 
+
+        >
+            const newCycleForm = useForm<NewCycleFormData>({
+                resolver: zodResolver(newCycleFormValidationSchema),
+                    defaultValues: {
+                    task: '',
+                    minutesAmount: 0,
+                }
+            })
+
+    - Como iremos precisar das seguintes funções: reset(), watch() e handleSubmit(), faremos a desestruturação, logo em seguida:
+
+        >
+            const { handleSubmit, watch, reset } = newCycleForm
+
+    - Agora, por volta do componente NewCycleForm, colocamos o FormProvider e aplicamos um spread, onde pegamos basicamente cada uma das propriedades desse objeto newCycleForm e passamos como propriedade pro FormProvider:
+
+        >
+            <FormProvider {...newCycleForm}>
+                <NewCycleForm />
+            </FormProvider>
+
+    - Criando o context no NewCycleForm (index.tsx), passando o register:
+
+        >
+            const { register } = useFormContext()
+
+        - Lembrando que o useFormContext(), so funciona se tiver um provider por volta do componente, que esta usando o useFormContext
