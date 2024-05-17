@@ -525,7 +525,7 @@
 
     - Para contornar este problema no react, temos um conceito no react chamado Context API
         - o Context API permite compartilhar informações entre vários components ao mesmo tempo
-        - a Context API não precisa utilziar de propriedades
+        - a Context API não precisa utilizar de propriedades
         - É como se fossem informações globais e que todos os componentes podem ter acesso, todos os componentes podem modificar as informações e quando modificas, indepentende de quem modificou as informações, todos os componentes que dependendiam e dependem dessas informações são atualizados.   
 
 - ## Entendendo contextos
@@ -673,3 +673,34 @@
 
     - Lembrete:
         - A forma principal de comunicação entre componentes no React é por propriedades, só iremos para a questão de contexto quando sentimos que teremos muitas propriedades para enviar de um componente à outro e isso acaba tornando nosso código muito complexo
+
+- ## Reducers
+
+    ### Criando reducer de ciclos
+    - Reducer serve para armazenar uma informação, assim como fazemos com as informações de ciclos e alterar essa informação no futuro
+
+    - ao trocarmos a linha de código a seguir:
+        1. const [cycles, setCycles] = useState<Cycle[]>([]) 
+    - por: 
+        2. const [cycles, setCycles] = useReducer((state, action) => {}, [])
+
+        - para o reducer é passado dois params, aonde o primeiro é uma função e o segundo um array
+        - No primeiro param, passamos também mais dois parâmetros, que seriam o state e o action
+            - state: seria o valor atual em tempo real da nossa varíavel de ciclos
+            - action: qual ação o usuário esta querendo realizar de alteração dentro da nossa varíavel, des forma, a action vai ser algo único digamos assim, para indicar uma ação que o usário está querendo realizar, para alterar o estado existente
+
+    - Dentro do useReducer, temos uma função que vai agregar, digamos assim, ser a função que recebe todas as ações de modificações neste estado, então se eu querer adicionar um novo item, interromper um ciclo, marcar como finalizado...Teremos um ponto central para todas as alterações que precisam acontecer e podemos identificar cada uma dessas ações, ou seja, dintiguimos cada uma delas através do type que enviamos dentro do dispatche ai podemos realizar qualquer alteração que eu queira nesse estado
+
+    - Lembrando que o retorno que fazemos desta função:
+
+        >
+            const [cycles, dispatch] = useReducer((state: Cycle[], action: any) => {
+                if (action.type === 'ADD_NEW_CYCLE') {
+                return [...state, action.payload.newCycle]
+                }
+                return state
+            }, [])
+
+        - Será o novo valor que este estado vai receber sempre que uma action for disparada
+
+        - Nem sempre iremos utilizar o useReducer, iremos utilizar ele mais nessas situações em que temos um estado complexo, que armazena informações complexas dentro de um estado e essas informações elas precisam mudar constantemente com alterações provindas de várias fontes diferentes, de vários componentes diferentes...
