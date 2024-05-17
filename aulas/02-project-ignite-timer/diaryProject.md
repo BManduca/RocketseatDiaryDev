@@ -670,3 +670,6 @@
             const { register } = useFormContext()
 
         - Lembrando que o useFormContext(), so funciona se tiver um provider por volta do componente, que esta usando o useFormContext
+
+    - Lembrete:
+        - A forma principal de comunicação entre componentes no React é por propriedades, só iremos para a questão de contexto quando sentimos que teremos muitas propriedades para enviar de um componente à outro e isso acaba tornando nosso código muito complexo
