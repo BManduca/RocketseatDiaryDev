@@ -704,3 +704,9 @@
         - Será o novo valor que este estado vai receber sempre que uma action for disparada
 
         - Nem sempre iremos utilizar o useReducer, iremos utilizar ele mais nessas situações em que temos um estado complexo, que armazena informações complexas dentro de um estado e essas informações elas precisam mudar constantemente com alterações provindas de várias fontes diferentes, de vários componentes diferentes...
+
+    ### Salvando um objeto no reducer
+    - Quando usamos reducer, não temos a obrigatoriedade de salvar somente uma informação, digamos somente a lista de ciclos, podemos salvar várias informações ali dentro, manter e alterar várias informações.
+
+    ### Separando Action Types
+    - Enum: Dicionário que diz para a gente exatamente quais as ações que a gente tem e quando em algum lugar do código a gente for realizar um dispatch por exemplo e não lembrar dos types, basta digitar a nomenclatura usada, como por exemplo ActionTypes, que usamos no nosso exemplo da aplicação e ao dar um autocomplete, já irão aparecer todos as opções.
