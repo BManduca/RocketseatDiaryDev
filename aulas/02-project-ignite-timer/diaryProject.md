@@ -710,3 +710,82 @@
 
     ### Separando Action Types
     - Enum: Dicionário que diz para a gente exatamente quais as ações que a gente tem e quando em algum lugar do código a gente for realizar um dispatch por exemplo e não lembrar dos types, basta digitar a nomenclatura usada, como por exemplo ActionTypes, que usamos no nosso exemplo da aplicação e ao dar um autocomplete, já irão aparecer todos as opções.
+
+    ### Separando Actions
+    - Por uma questão de organização e manutenabilidade, iremos criar dentro da pasta reducers, uma pasta cycles, levando para dentro dela o arquivo que antes se chamava cycles.ts e renomeamos para reducer.ts e também criamos um arquivo chamdo actions.ts, ao qual 'levaremos' a criação das ActionsTypes la para dentro e desta forma podemos criar as funções de ADD_NEW_CYCLE, INTERRUPT_CURRENT_CYCLE e MARK_CURRENT_CYCLE_AS_FINISHED, todas dentro desta pasta e assim chamar, as funções correspondentes la no arquivos CyclesContext.tsx
+
+    ### Utilizando immer
+    - Nesta parte estaremos aprendendo sobre o immer e aplicando esse biblioteca dentro do projeto
+    - O immer é uma biblioteca como mencionado acima, que usamos para trabalhar com dados imutáveis, ou seja, que trabalhar com conceito de imutabilidade, que é algo que bem trabalhado dentro do react
+    - Repo
+        - https://github.com/immerjs/immer
+
+    * instalação
+        - npm i immer
+
+    - Alteração exemplo dentro da aplicação
+        - dentro do ActionTypes.ADD_NEW_CYCLE, temos o seguinte return
+            >
+                return {
+                    ...state,
+                    cycles: [...state.cycles, action.payload.newCycle],
+                    activeCycleId: action.payload.newCycle.id,
+                }
+
+            - quando queremos adicionar um novo ciclo em nosso array de ciclos, temos que copiar todos os ciclos existentes (...state.cycles) e adicionar um novo ciclo no final (action.payload.newCycle) e isso, so é preciso fazer porque estamos utilizando dessa estrutura de imutabilidade
+
+            - Através do immer, esse processo fica bem mais fácil
+                - chamamos dentro do return o produce importado de dentro do immer, passando como parametro qual seria a informação que eu gostaria de modificar e no segundo parametro, recebemos uma variável draft e esse draft seria o rascunho e dentro deste mesmo, eu faço as alterações que eu gostaria de fazer, este rascunho tem o mesmo formato do meu state, a diferença é que eu posso trabalhar com esse draft como se fosse uma estrutura de dados mutável, sem precisar me preocupar com a imutábilidade do react
+
+                >
+                    return produce(state, draft => {
+                        // adicionando um novo ciclo
+                        draft.cycles.push(action.payload.newCycle)
+                        // recebendo o id do novo ciclo, sem precisar substituir o id do ciclo ativo
+                        draft.activeCycleId = action.payload.newCycle.id
+                    })
+
+        - Para o INTERRUPT_CURRENT_CYCLE, criamos a mesma estrutura, so que para interromper um ciclo, teremos que pegar o activeCycleId que esta dentro do draft, setar ele como nulo e também queremos encontrar o ciclo que esta dentro do meu array que tem o id igual ao id o meu ciclo ativo e colocar dentro dele uma informação interruptedDate, como a data atual. Nesse caso, for ado produce mesmo, nos iremos criar uma var currentCycleIndex, aonde iremos procurar o indice nesse array de ciclos, do ciclo que esta ativo atualmente e isso é possível, percorrendo o array de ciclos, dando um findIndex, procurando dentro do ciclo, qual seria o ciclo ao qual o id for igual activeCycleId
+
+            >
+                const currentCycleIndex = state.cycles.findIndex((cycle) => {
+                    return cycle.id === state.activeCycleId
+                })
+
+                // verificando se existe algum ciclo ativo
+                if (currentCycleIndex < 0) {
+                    return state
+                }
+
+                return produce(state, draft => {
+                    draft.activeCycleId = null
+                    draft.cycles[currentCycleIndex].interruptedDate = new Date()
+                })
+
+        - Para o ActionTypes MARK_CURRENT_CYCLE_AS_FINISHED, o processo é igual do INTERRUPT_CURRENT_CYCLE, porém, a única informação que troca é de interruptedDate para finishedDate, no return.
+
+            >
+
+                return produce(state, (draft) => {
+                    draft.activeCycleId = null
+                    draft.cycles[currentCycleIndex].finishedDate = new Date()
+                })
+
+
+    ### Salvando estado no storage
+    - Para salvar as informações dos ciclos nesta etapa, estaremos utilizando do storage do browser, assim quando dermos um f5 na page, não perderemos os dados e assim, ter que criar todo os ciclos do 0
+
+    - Para isso, dentro do CyclesContext, iremos criar um useEffect, para que toda vez que o cyclesState mudar, independente do motivo em si, ele será salvo no localStorage
+    - O localStorage so suporta que seja salvo texto.
+    - Ao salvar informações no localStorage
+        * Sempre colocar um prefixo com o nome da aplicação, seguido do nome escolhido
+        * Buscar colocar sempre meio que uma versão na sequencia do nome escolhido
+
+            >
+                useEffect(() => {
+                    const stateJSON = JSON.stringify(cyclesState)
+
+                    localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON)
+                }, [cyclesState])
+
+    - Por enquanto so estamos armazenando as informações no localStorage, porém, se for pra realmente armazenar e salvar, no useReducer, existe um terceiro parâmetro, que é uma função, que é disparada assim que o reducer for criado, para recuperar os dados iniciais do meu reducer de algum outro lugar.     
