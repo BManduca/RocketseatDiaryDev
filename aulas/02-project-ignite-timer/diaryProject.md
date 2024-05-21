@@ -789,3 +789,30 @@
                 }, [cyclesState])
 
     - Por enquanto so estamos armazenando as informações no localStorage, porém, se for pra realmente armazenar e salvar, no useReducer, existe um terceiro parâmetro, que é uma função, que é disparada assim que o reducer for criado, para recuperar os dados iniciais do meu reducer de algum outro lugar.     
+
+    - Pode ser que após essa alteração para salvar nossas informações de ciclos no localStorage, resulte em um bug nos números do nosso timer, desta forma, se caso ocorrer, podemos resolver da seguinte forma:
+
+        * acessando o arquivo index.tsx do nosso Countdown e 'indo' até o local aonde verificamos se existe um ciclo ativo, devemos colocar por volta do activeCycle.startDate, um new Date():
+
+            >
+                if (activeCycle) {
+                    interval = setInterval(() => {
+                        const secondsDifference = differenceInSeconds(
+                            new Date(),
+                            new Date(activeCycle.startDate),
+                        )
+                        ...
+                }
+
+    - Para não termos um problema com a janela de tempo de 1 segundo que a aplicação tem para nostrar o valor do time em tela, podemos fazer a seguinte alteração dentro do nosso context:
+
+        >
+            const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
+                if (activeCycle) {
+                return differenceInSeconds(new Date(), new Date(activeCycle.startDate))
+                }
+
+                return 0
+            })
+
+        * Desta forma nào inicianremos mais o amountSecondsPassed sempre com 0, pois, no começo quando estamos declarando o useState como mostrado acima, podemos usar uma função para calcular qual o valor inicial dessa variavel e assim retornarmos o valor da diferença em segundos caso nào seja 0
