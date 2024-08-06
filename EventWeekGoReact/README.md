@@ -1,0 +1,3 @@
+# Projeto AMA - Ask me anything
+
+- Neste projeto será desenvolvido uma aplicação para criar salas, aonde teremos um ID da sala com intuito de poder compartilhar esta mesma sala com mais usuários e também poder criar várias perguntas em tempo real, efetuar curtidas nas perguntas que mais chamarem atenção e componente digamos assim, principal se encontra nos WebSockets, aonde será efetuado envio de uma requisição e o servidor irá ficar retornando várias respostas, atualizando assim a aplicação de maneira full time.
