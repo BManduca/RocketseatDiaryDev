@@ -12,4 +12,3 @@
 - A idéia principal é que as pessoas possam fazem perguntas na sala em tempo real
 - Cada pergunta feita, pode ser curtida caso seja de interesse da pessoa
 - O diferencial é no uso de WebSockets, aonde é feita uma requisição para o servidor e o mesmo ficará retornando respostas para a aplicação, atualizando em tempo real, quando chegar novas perguntas ou novas interações com as perguntas já efetuadas.
-  
