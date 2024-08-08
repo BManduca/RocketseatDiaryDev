@@ -1,3 +1,14 @@
 # Projeto AMA - Ask me anything
 
-- Neste projeto será desenvolvido uma aplicação para criar salas, aonde teremos um ID da sala com intuito de poder compartilhar esta mesma sala com mais usuários e também poder criar várias perguntas em tempo real, efetuar curtidas nas perguntas que mais chamarem atenção e componente digamos assim, principal se encontra nos WebSockets, aonde será efetuado envio de uma requisição e o servidor irá ficar retornando várias respostas, atualizando assim a aplicação de maneira full time.
+- A aplicação será composto de: 
+  - Um servidor web escrito em GO
+  - Front-end será feito em React
+
+
+## Funcionamento da aplicação
+
+- Basicamente existirá várias salas, aonde cada uma tera um ID
+- Teremos a posibilidade de compartilhar a sala, para mais usuários que quiserem entrar
+- A idéia principal é que as pessoas possam fazem perguntas na sala em tempo real
+- Cada pergunta feita, pode ser curtida caso seja de interesse da pessoa
+- O diferencial é no uso de WebSockets, aonde é feita uma requisição para o servidor e o mesmo ficará retornando respostas para a aplicação, atualizando em tempo real, quando chegar novas perguntas ou novas interações com as perguntas já efetuadas.
