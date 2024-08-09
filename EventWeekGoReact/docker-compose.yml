@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      # {porta publica}:{porta acessada dentro do container}
+      # porta publica -> acessamos por fora do container
+      # porta acessada do container -> para networking interna que o docker cria
+      - ${WSBM_DATABASE_PORT:-5432}:5432
+    environment:
+      POSTGRES_USER: ${WSBM_DATABASE_USER}
+      POSTGRES_PASSWORD: ${WSBM_DATABASE_PASSWORD}
+      POSTGRES_DB: ${WSBM_DATABASE_NAME}
+    volumes:
+      - db:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    # o serviço depende do DB, ou seja, o serviço so vai subir, assim que o DB tenha subido.
+    depends_on:
+      - db
+    ports:
+      - ${WSBM_PGADMIN_PORT:-8081}:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${WSBM_PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${WSBM_PGADMIN_PASSWORD}
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    
+      
+volumes:
+  db:
+    # Armazenamento persistente dos dados do banco
+    # clonar os arquivos file system para o files system da maquína host
+    driver: local
+
+  pgadmin:
+    driver: local
