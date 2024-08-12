@@ -137,7 +137,22 @@
 
 ## [Configurando o VSCode para GO](https://efficient-sloth-d85.notion.site/Configurando-o-VSCode-para-Go-ed177054908d48f58095ff54d303f44c)
 
+## Evitando problema com CORS
+
+- A api que estamos construindo vai ser consumida por um front-end, que será feito em React
+- O front-end sendo feito em React, pode ocasionar os famosos CORS (Cross-Origin Resource Sharing) que é um sistema que consiste na transmissão de HTTP headers, que determina se navegadores vão bloquear código JavaScript de acessarem respostas provindas de requisições entre origens.
+- Será preciso fazer o handle desse cors, pois, se caso a nossa API não responder nada para o pre-flight request, simplesmente o CORS não vai funcionar e o browser por consequência vai bloquear os requests para aquela API
+  - Pre-flight request => Determine se a request atual para o servidor do domínio solicitante é segura
+- Para tratar esse situação o próprio CHI, tem um pacote chamado [CORS](https://github.com/go-chi/cors)
+  - basicamente é um middleware
+
+## Criando websockets em go
+- Precisamos utilizar o pacote [Gorilla/WebSocket](https://github.com/gorilla/websocket)
+- O pacote gorilla/websocket é uma implementação WebSocket rápida, bem testada e amplamente utilizada para Go.
+- Instalação: go get github.com/gorilla/websocket
+
 ## Extensões para auxiliar o projeto
 - [GO](https://marketplace.visualstudio.com/items?itemName=golang.go)
 - [Error lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
-- 
+
+[12:42]
