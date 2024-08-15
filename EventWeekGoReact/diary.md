@@ -154,5 +154,3 @@
 ## Extensões para auxiliar o projeto
 - [GO](https://marketplace.visualstudio.com/items?itemName=golang.go)
 - [Error lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
-
-[12:42]
