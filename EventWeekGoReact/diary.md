@@ -1,4 +1,4 @@
-# Projeto Ask me anything
+# Projeto Ask me anything (back-end/server)
 
 ## Primeiros passos
 
@@ -154,3 +154,5 @@
 ## Extensões para auxiliar o projeto
 - [GO](https://marketplace.visualstudio.com/items?itemName=golang.go)
 - [Error lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
+
+--------------------------------------------------------------------------------
