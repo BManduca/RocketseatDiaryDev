@@ -2,11 +2,9 @@ import { useParams } from "react-router-dom"
 
 export function Room() {
 
-    const roomID = useParams()
-
-    console.log(roomID)
+    const { roomID } = useParams()
 
     return (
-        <h1>Room</h1>
+        <h1>Room: {roomID}</h1>
     )
 }

@@ -111,3 +111,52 @@
 
           - para colocar o ícone de seta (->) dentro do button, iremos utilizar a biblioteca lucide-react
             - instalação npm i lucide-react
+        
+        <br />
+
+        - Para estilizar o button, aplicaremos as seguintes classes:
+            >
+              className='bg-orange-400 text-orange-950 px-3 py-1.5 gap-1.5 flex items-center rounded-lg font-medium text-sm'
+          
+          - resultado final do button
+          
+            ![button do form](./src/assets/button_form.png)
+
+        - Para estilizar o form, aplicaremos as seguintes classes:
+            >
+              className='flex items-center gap-2 bg-zinc-900 p-2 rounded-xl border border-zinc-800'
+
+          - resultado final do form
+          
+            ![form](./src/assets/form.png)
+          
+        - Para estilizar o input, aplicaremos as seguintes classes:
+            >
+              className='flex-1 text-sm bg-transparent mx-2 outline-none text-zinc-100 placeholder:text-zinc-500'
+
+          - resultrado final do input
+          
+            ![input](./src/assets/input.png)
+
+## Utilizando o React 19 RC
+
+- install the latest version of React and React DOMl: 
+  - npm install --save-exact react@rc react-dom@rc
+
+- No arquivo package.json, atualziar as dependencies:
+    > 
+      "@types/react": "npm:types-react@rc",
+      "@types/react-dom": "npm:types-react-dom@rc"
+
+- adicionar ao final do arquivo:
+    >
+      "overrides": {
+        "@types/react": "npm:types-react@rc",
+        "@types/react-dom": "npm:types-react-dom@rc"
+      }
+
+- depois desse processo, deletar:
+  - o arquivo package-lock.json
+  - a pasta node_module
+  
+  - efetuar o comando npm i -f por causa que o react esta 'esperando' integração com a versão 18, porém, como atualizamos para versão 19 que esta em beta ainda, poderá resultar em conflitos.
