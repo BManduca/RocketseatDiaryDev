@@ -156,3 +156,7 @@
 - [Error lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens)
 
 --------------------------------------------------------------------------------
+
+## Create alias to Generate uuid 
+
+- alias uuid="uuidgen | tr -d '\n'"
