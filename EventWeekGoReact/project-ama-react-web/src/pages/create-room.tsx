@@ -1,6 +1,8 @@
 import amaLogo from '../assets/ama-logo.svg'
 import { ArrowRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import { createRoom } from '../http/create-room'
+import { toast } from 'sonner'
 
 export function CreateRoom() {
 
@@ -11,13 +13,21 @@ export function CreateRoom() {
 
         - é que o action permite pegar todos os dados do form diretamente pelo parâmetro
     */
-    function handleCreateRoom(data: FormData) {
+    async function handleCreateRoom(data: FormData) {
         //convertendo para string e a verificaçào existe, para caso ele venha undefined
         const theme = data.get('theme')?.toString()
+        
+        if (!theme) {
+            return 
+        }
 
-        console.log(theme)
+        try {
+            const { roomID } = await createRoom({ theme })
 
-        navigate('/room/l1k2ij1h313j1312')
+            navigate(`/room/${roomID}`)
+        } catch {
+            toast.error('Falha ao criar a sala!')
+        }
     }
 
     return (
@@ -39,6 +49,7 @@ export function CreateRoom() {
                         placeholder='Nome da sala'
                         autoComplete='off'
                         className='flex-1 text-sm bg-transparent mx-2 outline-none text-zinc-100 placeholder:text-zinc-500'
+                        required
                     />
 
                     <button

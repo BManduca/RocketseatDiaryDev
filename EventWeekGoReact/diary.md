@@ -160,3 +160,14 @@
 ## Create alias to Generate uuid 
 
 - alias uuid="uuidgen | tr -d '\n'"
+
+## Criando uma "Ordered List"
+
+- No Projeto AMA (Ask Me Anything), depois que criarmos a sala de pergutntas, as perguntas serão apresentadas dentro de um lista e para isso estaremos utilizando o ordered list, da seguinte forma:
+    >
+      <ol className='list-decimal list-inside'>
+
+      </ol>
+
+  - Aonde teremos um list type como decimal, que assim cada item da lista começará com um numeral, por exemplo 1,2,3 e assim por diante...
+  - teremos também o list-inside, que irá fazer com que o list-position seja inside e fará com que o número da listagem, ou seja, de cada item esteja dentro do texto e não fora.
