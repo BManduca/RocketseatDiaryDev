@@ -171,3 +171,9 @@
 
   - Aonde teremos um list type como decimal, que assim cada item da lista começará com um numeral, por exemplo 1,2,3 e assim por diante...
   - teremos também o list-inside, que irá fazer com que o list-position seja inside e fará com que o número da listagem, ou seja, de cada item esteja dentro do texto e não fora.
+
+## Trabalhando com requisições no react
+
+- Uma forma de trabalhar com requisições e api dentro do Vite é utilizando o react-query e podemos instalar da seguinte forma:
+  - npm i @tanstack/react-query -f
+    - como aqui ainda depende da versão 18 do react, teremos que utilizar o -f

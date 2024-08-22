@@ -160,4 +160,3 @@
   - a pasta node_module
   
   - efetuar o comando npm i -f por causa que o react esta 'esperando' integração com a versão 18, porém, como atualizamos para versão 19 que esta em beta ainda, poderá resultar em conflitos.
-[49:30]
