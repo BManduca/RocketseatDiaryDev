@@ -1,22 +1,18 @@
-import amaLogo from '../assets/ama-logo.svg'
 import { ArrowRight } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import { createRoom } from '../http/create-room'
 import { toast } from 'sonner'
+import { useNavigate } from 'react-router-dom'
+
+import amaLogo from '../assets/ama-logo.svg'
+import { createRoom } from '../http/create-room'
 
 export function CreateRoom() {
 
     const navigate = useNavigate()
 
-    /*
-        diferença do action para o fromSubmit
-
-        - é que o action permite pegar todos os dados do form diretamente pelo parâmetro
-    */
     async function handleCreateRoom(data: FormData) {
         //convertendo para string e a verificaçào existe, para caso ele venha undefined
         const theme = data.get('theme')?.toString()
-        
+
         if (!theme) {
             return 
         }
